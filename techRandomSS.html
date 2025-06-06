@@ -23,7 +23,7 @@
         body, .bg-change {
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-        /* Style to prevent image selection */
+        /* Style to prevent image selection and dragging */
         .unselectable {
             pointer-events: none;
             user-select: none;
@@ -87,27 +87,27 @@
         <section class="mb-16">
             <h2 class="text-3xl font-bold text-center mb-10">Nuestro Equipo</h2>
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Team Member Card -->
+                <!-- Team Member Card: object-cover ensures the image fills the circle without distortion -->
                 <div class="text-center bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 bg-change">
-                    <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="presentacionProyecto/mario.png" alt="Foto de Mario Martinez">
+                    <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="presentacionProyecto/mario.png" alt="Foto de Mario Martinez" onerror="this.onerror=null;this.src='https://placehold.co/128x128/EFEFEF/333333?text=MM';">
                     <h4 class="text-xl font-semibold">Mario Martinez</h4>
                     <p class="text-gray-500 dark:text-gray-400">Analista/Programador Genexus</p>
                 </div>
                 <!-- Team Member Card -->
                 <div class="text-center bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 bg-change">
-                    <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="presentacionProyecto/bruno.png" alt="Foto de Bruno Gonzalez">
+                    <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="presentacionProyecto/bruno.png" alt="Foto de Bruno Gonzalez" onerror="this.onerror=null;this.src='https://placehold.co/128x128/EFEFEF/333333?text=BG';">
                     <h4 class="text-xl font-semibold">Bruno Gonzalez</h4>
                     <p class="text-gray-500 dark:text-gray-400">DevOps | SysAdmin</p>
                 </div>
                 <!-- Team Member Card -->
                 <div class="text-center bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 bg-change">
-                    <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="presentacionProyecto/kamila.png" alt="Foto de Kamila Quintana">
+                    <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="presentacionProyecto/kamila.png" alt="Foto de Kamila Quintana" onerror="this.onerror=null;this.src='https://placehold.co/128x128/EFEFEF/333333?text=KQ';">
                     <h4 class="text-xl font-semibold">Kamila Quintana</h4>
                     <p class="text-gray-500 dark:text-gray-400">Full-Stack Developer</p>
                 </div>
                 <!-- Team Member Card -->
                 <div class="text-center bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 bg-change">
-                    <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="presentacionProyecto/william.png" alt="Foto de William Machado">
+                    <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="presentacionProyecto/william.png" alt="Foto de William Machado" onerror="this.onerror=null;this.src='https://placehold.co/128x128/EFEFEF/333333?text=WM';">
                     <h4 class="text-xl font-semibold">William Machado</h4>
                     <p class="text-gray-500 dark:text-gray-400">Docente de Inglés</p>
                 </div>
@@ -145,7 +145,7 @@
         <section class="mb-16">
             <h2 class="text-3xl font-bold text-center mb-10">Diagrama de Contexto</h2>
              <div class="bg-white dark:bg-gray-800 p-4 md:p-8 rounded-xl shadow-2xl bg-change">
-                <img src="presentacionProyecto/diagrama.png" alt="Diagrama de contexto del sistema" class="w-full h-auto rounded-lg unselectable" oncontextmenu="return false;" onerror="this.onerror=null;this.src='https://placehold.co/1200x600/CCCCCC/333333?text=Error+al+cargar+la+imagen';">
+                <img src="presentacionProyecto/diagrama.png" alt="Diagrama de contexto del sistema" class="w-full h-auto rounded-lg unselectable" oncontextmenu="return false;" onerror="this.onerror=null;this.src='https://placehold.co/1200x600/CCCCCC/333333?text=Diagrama+no+disponible';">
             </div>
         </section>
 
@@ -159,7 +159,7 @@
                     </p>
                 </div>
                 <div class="mt-8 md:mt-0">
-                    <img src="presentacionProyecto/utec.png" alt="Imagen de la Universidad Tecnológica del Uruguay" class="w-full h-auto rounded-lg shadow-md unselectable" oncontextmenu="return false;">
+                    <img src="presentacionProyecto/utec.png" alt="Imagen de la Universidad Tecnológica del Uruguay" class="w-full h-auto rounded-lg shadow-md unselectable" oncontextmenu="return false;" onerror="this.onerror=null;this.src='https://placehold.co/600x400/CCCCCC/333333?text=Foto+no+disponible';">
                 </div>
             </div>
         </section>
@@ -169,7 +169,7 @@
     <!-- Footer -->
     <footer class="bg-white dark:bg-gray-800 mt-16 py-6 border-t border-gray-200 dark:border-gray-700 bg-change">
         <div class="container mx-auto px-6 text-center text-gray-500 dark:text-gray-400">
-            <p>&copy; 2025 | UTEC - Licenciatura en Tecnologías de la Información</p>
+            <p>&copy; 2024 | UTEC - Licenciatura en Tecnologías de la Información</p>
         </div>
     </footer>
 
@@ -179,9 +179,12 @@
             const themeToggleButton = document.getElementById('theme-toggle-button');
             const lightIcon = document.getElementById('theme-toggle-light-icon');
             const darkIcon = document.getElementById('theme-toggle-dark-icon');
+            
+            // This variable will hold the current theme state
+            let isDark;
 
             // Function to apply theme and update icon
-            function applyTheme(isDark) {
+            function applyTheme() {
                 if (isDark) {
                     document.documentElement.classList.add('dark');
                     lightIcon.classList.add('hidden');
@@ -193,18 +196,20 @@
                 }
             }
 
-            // Determine initial theme
-            let isDark = localStorage.getItem('theme') === 'dark' || 
-                         (localStorage.getItem('theme') === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
-            
-            applyTheme(isDark);
+            // Function to toggle theme, apply it, and save preference
+            function toggleTheme() {
+                isDark = !isDark; // Flip the state
+                localStorage.setItem('theme', isDark ? 'dark' : 'light'); // Save the new state
+                applyTheme(); // Apply the visual changes
+            }
 
-            // Add event listener
-            themeToggleButton.addEventListener('click', () => {
-                isDark = !document.documentElement.classList.contains('dark');
-                applyTheme(isDark);
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            });
+            // Initialize theme on page load
+            isDark = localStorage.getItem('theme') === 'dark' || 
+                     (localStorage.getItem('theme') === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            applyTheme();
+
+            // Add event listener to the button
+            themeToggleButton.addEventListener('click', toggleTheme);
         });
     </script>
 
