@@ -94,23 +94,24 @@
         <section class="mb-16" aria-labelledby="team-title">
             <h2 id="team-title" class="text-3xl font-bold text-center mb-10 text-gray-900 dark:text-white">Nuestro Equipo</h2>
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 bg-change">
-                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="mario.png" alt="Foto de Mario Martinez, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=MM';">
+                <!-- Se movió la animación de hover al contenedor ARTICLE para evitar conflictos -->
+                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transition-transform duration-300 hover:scale-105 bg-change group">
+                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" src="mario.png" alt="Foto de Mario Martinez, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=MM';">
                     <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Mario Martinez</h3>
                     <p class="text-gray-500 dark:text-slate-400">Analista/Programador Genexus</p>
                 </article>
-                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 bg-change">
-                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="bruno.png" alt="Foto de Bruno Gonzalez, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=BG';">
+                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transition-transform duration-300 hover:scale-105 bg-change group">
+                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" src="bruno.png" alt="Foto de Bruno Gonzalez, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=BG';">
                     <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Bruno Gonzalez</h3>
                     <p class="text-gray-500 dark:text-slate-400">DevOps | SysAdmin</p>
                 </article>
-                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 bg-change">
-                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="kamila.png" alt="Foto de Kamila Quintana, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=KQ';">
+                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transition-transform duration-300 hover:scale-105 bg-change group">
+                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" src="kamila.png" alt="Foto de Kamila Quintana, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=KQ';">
                     <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Kamila Quintana</h3>
                     <p class="text-gray-500 dark:text-slate-400">Full-Stack Developer</p>
                 </article>
-                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 bg-change">
-                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="william.png" alt="Foto de William Machado, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=WM';">
+                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transition-transform duration-300 hover:scale-105 bg-change group">
+                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" src="william.png" alt="Foto de William Machado, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=WM';">
                     <h3 class="text-xl font-semibold text-gray-800 dark:text-white">William Machado</h3>
                     <p class="text-gray-500 dark:text-slate-400">Docente de Inglés</p>
                 </article>
@@ -200,70 +201,68 @@
     </footer>
 
     <script>
-        window.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
             const themeToggleButton = document.getElementById('theme-toggle-button');
             const lightIcon = document.getElementById('theme-toggle-light-icon');
             const darkIcon = document.getElementById('theme-toggle-dark-icon');
             const htmlEl = document.documentElement;
 
-            // Función para aplicar el tema (clase 'dark' en <html>) y actualizar el ícono
             const applyTheme = (theme) => {
                 htmlEl.classList.toggle('dark', theme === 'dark');
                 lightIcon.classList.toggle('hidden', theme === 'dark');
                 darkIcon.classList.toggle('hidden', theme !== 'dark');
             };
-            
-            // Iniciar con tema claro por defecto. Si hay uno guardado, usarlo.
+
             const savedTheme = localStorage.getItem('theme');
             applyTheme(savedTheme || 'light');
 
-            // Listener para el botón que alterna el tema
             themeToggleButton.addEventListener('click', () => {
-                const currentTheme = htmlEl.classList.contains('dark') ? 'dark' : 'light';
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                const newTheme = htmlEl.classList.contains('dark') ? 'light' : 'dark';
                 localStorage.setItem('theme', newTheme);
                 applyTheme(newTheme);
             });
 
-            // --- Lógica del Modal Accesible ---
             const modal = document.getElementById('value-proposition-modal');
             const openModalButton = document.getElementById('open-modal-button');
             const closeModalButton = document.getElementById('close-modal-button');
             const focusableElementsString = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-            let firstFocusableEl;
-            let lastFocusableEl;
+            let firstFocusableEl, lastFocusableEl;
 
             const openModal = () => {
                 modal.classList.remove('hidden');
+                modal.classList.remove('modal-enter');
+                modal.classList.add('modal-enter-active');
                 
-                // Atrapar el foco dentro del modal
                 const focusableElements = modal.querySelectorAll(focusableElementsString);
                 firstFocusableEl = focusableElements[0];
                 lastFocusableEl = focusableElements[focusableElements.length - 1];
                 
-                // Mover foco al primer elemento (el botón de cerrar)
                 setTimeout(() => firstFocusableEl.focus(), 50);
-                
                 modal.addEventListener('keydown', trapFocus);
             };
 
             const closeModal = () => {
-                modal.classList.add('hidden');
+                modal.classList.remove('modal-enter-active');
+                modal.classList.add('modal-leave-active');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('modal-leave-active');
+                    modal.classList.add('modal-enter');
+                }, 200);
                 modal.removeEventListener('keydown', trapFocus);
-                // Devolver el foco al botón que abrió el modal
                 openModalButton.focus();
             };
             
             const trapFocus = (e) => {
                 const isTabPressed = e.key === 'Tab' || e.keyCode === 9;
-                if (!isTabPressed) { return; }
+                if (!isTabPressed) return;
 
-                if (e.shiftKey) { // Shift + Tab
+                if (e.shiftKey) {
                     if (document.activeElement === firstFocusableEl) {
                         lastFocusableEl.focus();
                         e.preventDefault();
                     }
-                } else { // Tab
+                } else {
                     if (document.activeElement === lastFocusableEl) {
                         firstFocusableEl.focus();
                         e.preventDefault();
@@ -274,7 +273,6 @@
             openModalButton.addEventListener('click', openModal);
             closeModalButton.addEventListener('click', closeModal);
             
-            // Cerrar con la tecla Escape
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
                     closeModal();
