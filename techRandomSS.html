@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="">
+<html lang="es"> <!-- La clase 'dark' se añadirá o quitará con JavaScript -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,177 +18,154 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
-        /* Simple transition for color changes */
-        body, .bg-change {
-            transition: background-color 0.3s ease, color 0.3s ease;
+        .bg-change {
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
         }
-        /* Style to prevent image selection and dragging */
         .unselectable {
             pointer-events: none;
             user-select: none;
-            -webkit-user-select: none; /* Safari */
-            -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* IE10+ */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
-        /* Animation for modal */
-        .modal-enter {
-            opacity: 0;
-            transform: scale(0.95);
-        }
-        .modal-enter-active {
-            opacity: 1;
-            transform: scale(1);
-            transition: all 0.2s ease-out;
-        }
-        .modal-leave {
-            opacity: 1;
-            transform: scale(1);
-        }
-        .modal-leave-active {
-            opacity: 0;
-            transform: scale(0.95);
-            transition: all 0.2s ease-in;
-        }
+        /* Animaciones para el Modal/Pop-up */
+        .modal-enter { opacity: 0; transform: scale(0.95); }
+        .modal-enter-active { opacity: 1; transform: scale(1); transition: all 0.2s ease-out; }
+        .modal-leave-active { opacity: 0; transform: scale(0.95); transition: all 0.2s ease-in; }
     </style>
 </head>
-<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 antialiased">
+<body class="bg-gray-50 dark:bg-gradient-to-br dark:from-slate-900 dark:to-slate-800 text-gray-800 dark:text-slate-300 antialiased">
 
-    <!-- Header -->
-    <header class="bg-white dark:bg-gray-800 shadow-md bg-change fixed w-full top-0 z-20">
+    <!-- HEADER: Contiene la navegación principal del sitio. Se usa la etiqueta <header> para la semántica. -->
+    <header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm shadow-md bg-change fixed w-full top-0 z-20 border-b border-gray-200 dark:border-slate-800">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <svg class="w-10 h-10 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                <h1 class="text-xl md:text-2xl font-bold text-gray-800 dark:text-white">
-                   Asistente de Compras
-                </h1>
-            </div>
-            <div class="flex items-center gap-4">
-                 <!-- Menu Button -->
-                <button id="open-modal-button" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Propuesta de Valor</button>
-                <!-- Theme Switcher -->
-                <button id="theme-toggle-button" class="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700">
-                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-                </button>
-            </div>
+            <a href="#" class="flex items-center space-x-3" aria-label="Asistente de Compras - Página de inicio">
+                <svg class="w-10 h-10 text-blue-600 dark:text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span class="text-xl md:text-2xl font-bold text-gray-800 dark:text-white">Asistente de Compras</span>
+            </a>
+            
+            <!-- NAV: Etiqueta semántica para la navegación principal. -->
+            <nav aria-label="Navegación principal">
+                <div class="flex items-center gap-4">
+                    <button id="open-modal-button" aria-haspopup="dialog" class="text-sm font-medium text-gray-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-sky-400 transition-colors">Propuesta de Valor</button>
+                    <button id="theme-toggle-button" aria-label="Cambiar entre tema claro y oscuro" class="p-2 rounded-full text-gray-500 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-sky-500 dark:ring-offset-slate-900">
+                        <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                        <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                    </button>
+                </div>
+            </nav>
         </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- MAIN: Contenedor principal para el contenido único de la página. -->
     <main class="container mx-auto px-6 py-24 pt-32">
-
-        <!-- Project Hero Section -->
-        <section class="text-center mb-16">
+        
+        <!-- SECTION: Agrupa el contenido introductorio. aria-labelledby conecta el título con la sección. -->
+        <section class="text-center mb-16" aria-labelledby="hero-title">
             <div class="flex justify-center items-center gap-4">
-                <h2 class="text-3xl md:text-5xl font-extrabold mb-4">Asistente de Compras por Voz</h2>
-                <svg class="w-10 h-10 md:w-12 md:h-12 text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/></svg>
+                <h1 id="hero-title" class="text-3xl md:text-5xl font-extrabold mb-4 text-gray-900 dark:text-white">Asistente de Compras por Voz</h1>
+                <svg aria-hidden="true" class="w-10 h-10 md:w-12 md:h-12 text-blue-500 dark:text-sky-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/></svg>
             </div>
-            <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-600 dark:text-gray-400">
-                Un proyecto de la Licenciatura en TI de UTEC para mejorar la accesibilidad en servicios de compra digital para personas con discapacidad visual.
+            <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-600 dark:text-slate-400">
+                Un proyecto de la Licenciatura en TI de UTEC para mejorar la accesibilidad en servicios de compra digital.
             </p>
         </section>
 
-        <!-- Project Details Section -->
-        <section class="grid md:grid-cols-3 gap-8 mb-16">
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg bg-change">
-                <h3 class="text-xl font-bold mb-3 text-blue-600 dark:text-blue-400">Necesidad Identificada</h3>
-                <p>Existe una brecha importante en el acceso digital a servicios de compra para personas en situación de discapacidad visual, limitando su autonomía.</p>
-            </div>
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg bg-change">
-                <h3 class="text-xl font-bold mb-3 text-blue-600 dark:text-blue-400">Importancia</h3>
-                <p>Este proyecto contribuye a la inclusión social y promueve la equidad en el acceso a bienes y servicios básicos, ofreciendo una solución adaptable a diversas tiendas.</p>
-            </div>
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg bg-change">
-                <h3 class="text-xl font-bold mb-3 text-blue-600 dark:text-blue-400">Cliente y Validación</h3>
-                <p>Desarrollado con el apoyo de la <span class="font-semibold">Unión Nacional de Ciegos del Uruguay (UNCU)</span>, lo que nos permite validar la solución con usuarios finales reales.</p>
-            </div>
+        <!-- SECTION: Agrupa los detalles clave del proyecto. -->
+        <section class="grid md:grid-cols-3 gap-8 mb-16" aria-label="Detalles del proyecto">
+            <!-- ARTICLE: Representa una pieza de contenido independiente y con sentido propio. -->
+            <article class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg bg-change">
+                <h2 class="text-xl font-bold mb-3 text-blue-600 dark:text-sky-400">Necesidad Identificada</h2>
+                <p>Existe una brecha importante en el acceso digital a servicios de compra para personas en situación de discapacidad visual.</p>
+            </article>
+            <article class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg bg-change">
+                <h2 class="text-xl font-bold mb-3 text-blue-600 dark:text-sky-400">Importancia</h2>
+                <p>Este proyecto contribuye a la inclusión social y promueve la equidad en el acceso a bienes y servicios básicos.</p>
+            </article>
+            <article class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg bg-change">
+                <h2 class="text-xl font-bold mb-3 text-blue-600 dark:text-sky-400">Cliente y Validación</h2>
+                <!-- ABBR: Etiqueta para abreviaturas, el título ofrece la expansión completa. -->
+                <p>Desarrollado con el apoyo de la <abbr title="Unión Nacional de Ciegos del Uruguay" class="font-semibold text-gray-700 dark:text-slate-100 no-underline">UNCU</abbr> para validar con usuarios finales reales.</p>
+            </article>
         </section>
 
-        <!-- Team Section -->
-        <section class="mb-16">
-            <h2 class="text-3xl font-bold text-center mb-10">Nuestro Equipo</h2>
+        <section class="mb-16" aria-labelledby="team-title">
+            <h2 id="team-title" class="text-3xl font-bold text-center mb-10 text-gray-900 dark:text-white">Nuestro Equipo</h2>
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="text-center bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 bg-change">
-                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="mario.png" alt="Foto de Mario Martinez" onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=MM';">
-                    <h4 class="text-xl font-semibold">Mario Martinez</h4>
-                    <p class="text-gray-500 dark:text-gray-400">Analista/Programador Genexus</p>
-                </div>
-                <div class="text-center bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 bg-change">
-                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="bruno.png" alt="Foto de Bruno Gonzalez" onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=BG';">
-                    <h4 class="text-xl font-semibold">Bruno Gonzalez</h4>
-                    <p class="text-gray-500 dark:text-gray-400">DevOps | SysAdmin</p>
-                </div>
-                <div class="text-center bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 bg-change">
-                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="kamila.png" alt="Foto de Kamila Quintana" onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=KQ';">
-                    <h4 class="text-xl font-semibold">Kamila Quintana</h4>
-                    <p class="text-gray-500 dark:text-gray-400">Full-Stack Developer</p>
-                </div>
-                <div class="text-center bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 bg-change">
-                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="william.png" alt="Foto de William Machado" onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=WM';">
-                    <h4 class="text-xl font-semibold">William Machado</h4>
-                    <p class="text-gray-500 dark:text-gray-400">Docente de Inglés</p>
-                </div>
+                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 bg-change">
+                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="mario.png" alt="Foto de Mario Martinez, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=MM';">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Mario Martinez</h3>
+                    <p class="text-gray-500 dark:text-slate-400">Analista/Programador Genexus</p>
+                </article>
+                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 bg-change">
+                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="bruno.png" alt="Foto de Bruno Gonzalez, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=BG';">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Bruno Gonzalez</h3>
+                    <p class="text-gray-500 dark:text-slate-400">DevOps | SysAdmin</p>
+                </article>
+                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 bg-change">
+                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="kamila.png" alt="Foto de Kamila Quintana, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=KQ';">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Kamila Quintana</h3>
+                    <p class="text-gray-500 dark:text-slate-400">Full-Stack Developer</p>
+                </article>
+                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 bg-change">
+                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" oncontextmenu="return false;" src="william.png" alt="Foto de William Machado, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=WM';">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white">William Machado</h3>
+                    <p class="text-gray-500 dark:text-slate-400">Docente de Inglés</p>
+                </article>
             </div>
         </section>
         
-        <!-- Architecture Section -->
-        <section class="mb-16">
-            <h2 class="text-3xl font-bold text-center mb-10">Diagrama de Contexto</h2>
-             <div class="bg-white dark:bg-gray-800 p-4 md:p-8 rounded-xl shadow-2xl bg-change">
-                <img src="diagrama.png" alt="Diagrama de contexto del sistema" class="w-full h-auto rounded-lg unselectable" oncontextmenu="return false;" onerror="this.onerror=null;this.src='https://placehold.co/1200x600/CCCCCC/333333?text=Diagrama+no+disponible';">
-            </div>
+        <section class="mb-16" aria-labelledby="diagram-title">
+            <h2 id="diagram-title" class="text-3xl font-bold text-center mb-10 text-gray-900 dark:text-white">Diagrama de Contexto</h2>
+            <figure class="bg-white dark:bg-slate-800 p-4 md:p-8 rounded-xl shadow-2xl bg-change">
+                <img src="diagrama.png" alt="Diagrama de flujo que muestra la interacción entre el usuario, el asistente de voz, el backend, la tienda y la API de pagos." class="w-full h-auto rounded-lg unselectable" oncontextmenu="return false;" onerror="this.onerror=null;this.src='https://placehold.co/1200x600/CCCCCC/333333?text=Diagrama no disponible';">
+            </figure>
         </section>
 
-        <!-- About UTEC Section -->
-        <section class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg bg-change">
+        <section class="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-lg bg-change" aria-labelledby="utec-title">
             <div class="grid md:grid-cols-2 gap-8 items-center">
                 <div>
-                    <h2 class="text-3xl font-bold mb-6 text-center md:text-left">Acerca de la UTEC</h2>
-                    <p class="text-center md:text-left max-w-4xl mx-auto text-lg text-gray-600 dark:text-gray-300">
-                        Universidad pública de perfil tecnológico, orientada a la investigación e innovación. Comprometida con los lineamientos estratégicos del país, fomenta la construcción colectiva de conocimientos y el vínculo con el sector productivo para promover el desarrollo social, económico y tecnológico de Uruguay.
+                    <h2 id="utec-title" class="text-3xl font-bold mb-6 text-center md:text-left text-gray-900 dark:text-white">Acerca de la UTEC</h2>
+                    <p class="text-center md:text-left max-w-4xl mx-auto text-lg text-gray-600 dark:text-slate-400">
+                        Universidad pública de perfil tecnológico, orientada a la investigación e innovación. Comprometida con los lineamientos estratégicos del país.
                     </p>
                 </div>
-                <div class="mt-8 md:mt-0">
-                    <img src="utec.png" alt="Imagen de la Universidad Tecnológica del Uruguay" class="w-full h-auto rounded-lg shadow-md unselectable" oncontextmenu="return false;" onerror="this.onerror=null;this.src='https://placehold.co/600x400/CCCCCC/333333?text=Foto+no+disponible';">
-                </div>
+                <figure class="mt-8 md:mt-0">
+                    <img src="utec.png" alt="Fachada de la Universidad Tecnológica del Uruguay." class="w-full h-auto rounded-lg shadow-md unselectable" oncontextmenu="return false;" onerror="this.onerror=null;this.src='https://placehold.co/600x400/CCCCCC/333333?text=Foto no disponible';">
+                </figure>
             </div>
         </section>
-
     </main>
     
-    <!-- Modal for Value Proposition -->
-    <div id="value-proposition-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-30 flex items-center justify-center p-4 modal-enter">
-        <div id="modal-content" class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl bg-change overflow-hidden w-full max-w-4xl relative">
-             <!-- Close Button -->
-            <button id="close-modal-button" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 dark:hover:text-white">
+    <!-- Modal semántico con roles ARIA para accesibilidad -->
+    <div id="value-proposition-modal" class="hidden fixed inset-0 bg-black/60 z-30 flex items-center justify-center p-4 modal-enter" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div id="modal-content" class="bg-white dark:bg-slate-800 rounded-xl shadow-2xl bg-change overflow-hidden w-full max-w-4xl relative">
+            <button id="close-modal-button" aria-label="Cerrar ventana de Propuesta de Valor" class="absolute top-4 right-4 text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white transition-colors">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div class="grid md:grid-cols-2 items-center">
-                <!-- Left Column: Image -->
-                <div class="p-8 text-center flex flex-col items-center justify-center border-r border-gray-200 dark:border-gray-700">
-                    <img src="cliente.png" alt="Ilustración del cliente" class="w-full max-w-xs mx-auto unselectable" oncontextmenu="return false;" onerror="this.onerror=null;this.src='https://placehold.co/400x400/CCCCCC/333333?text=Cliente';">
+                <div class="p-8 text-center flex flex-col items-center justify-center border-r border-gray-200 dark:border-slate-700">
+                    <img src="cliente.png" alt="Ilustración de dos personas, una con discapacidad visual y otra con discapacidad física, sosteniendo juntas el planeta tierra." class="w-full max-w-xs mx-auto unselectable" oncontextmenu="return false;" onerror="this.onerror=null;this.src='https://placehold.co/400x400/CCCCCC/333333?text=Cliente';">
                 </div>
-                <!-- Right Column: Details -->
                 <div class="p-8">
-                    <h2 class="text-2xl font-bold text-center mb-6">Propuesta de Valor</h2>
-                    <!-- Trabajos del Cliente -->
+                    <h2 id="modal-title" class="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-white">Propuesta de Valor</h2>
                     <div class="flex items-start gap-4 mb-6">
-                        <div class="flex-shrink-0 w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
-                            <svg class="w-6 h-6 text-blue-600 dark:text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                        <div aria-hidden="true" class="flex-shrink-0 w-12 h-12 bg-blue-100 dark:bg-sky-900/50 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-blue-600 dark:text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
                         </div>
                         <div>
-                            <h4 class="font-bold text-lg text-blue-800 dark:text-blue-300">TRABAJOS DEL CLIENTE</h4>
+                            <h3 class="font-bold text-lg text-blue-800 dark:text-sky-400">TRABAJOS DEL CLIENTE</h3>
                             <p>Realizar compras online de productos básicos con comodidad y autonomía.</p>
                         </div>
                     </div>
-                    <!-- Frustraciones -->
                     <div class="flex items-start gap-4 mb-6">
-                        <div class="flex-shrink-0 w-12 h-12 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center">
-                            <svg class="w-6 h-6 text-red-600 dark:text-red-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <div aria-hidden="true" class="flex-shrink-0 w-12 h-12 bg-red-100 dark:bg-red-900/50 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
                         <div>
-                            <h4 class="font-bold text-lg text-red-800 dark:text-red-300">FRUSTRACIONES</h4>
+                            <h3 class="font-bold text-lg text-red-800 dark:text-red-400">FRUSTRACIONES</h3>
                             <ul class="list-disc list-inside">
                                 <li>Nula accesibilidad autónoma.</li>
                                 <li>Proveedores sin accesibilidad.</li>
@@ -196,19 +173,17 @@
                             </ul>
                         </div>
                     </div>
-                    <!-- Beneficios Esperados -->
                     <div class="flex items-start gap-4">
-                         <div class="flex-shrink-0 w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
-                            <svg class="w-6 h-6 text-green-600 dark:text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4H5z"></path></svg>
+                         <div aria-hidden="true" class="flex-shrink-0 w-12 h-12 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4H5z"></path></svg>
                         </div>
                         <div>
-                            <h4 class="font-bold text-lg text-green-800 dark:text-green-300">BENEFICIOS ESPERADOS</h4>
+                            <h3 class="font-bold text-lg text-green-800 dark:text-green-400">BENEFICIOS ESPERADOS</h3>
                              <ul class="list-disc list-inside">
                                 <li>Realizar compras sin ayuda.</li>
                                 <li>Facilidad de uso con voz.</li>
                                 <li>Mayor autonomía y privacidad.</li>
                                 <li>Integración con delivery o pickup.</li>
-                                <li>Interacción amigable y personalizada.</li>
                             </ul>
                         </div>
                     </div>
@@ -217,75 +192,95 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-white dark:bg-gray-800 mt-16 py-6 border-t border-gray-200 dark:border-gray-700 bg-change">
-        <div class="container mx-auto px-6 text-center text-gray-500 dark:text-gray-400">
-            <p>&copy; 2025 | UTEC - Licenciatura en Tecnologías de la Información</p>
+    <!-- FOOTER: Etiqueta semántica para el pie de página. -->
+    <footer class="bg-white dark:bg-slate-900 mt-16 py-6 border-t border-gray-200 dark:border-slate-800 bg-change">
+        <div class="container mx-auto px-6 text-center text-gray-500 dark:text-slate-400">
+            <p>&copy; 2024 | UTEC - Licenciatura en Tecnologías de la Información</p>
         </div>
     </footer>
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {
-            // --- Elements ---
             const themeToggleButton = document.getElementById('theme-toggle-button');
             const lightIcon = document.getElementById('theme-toggle-light-icon');
             const darkIcon = document.getElementById('theme-toggle-dark-icon');
-            const modal = document.getElementById('value-proposition-modal');
-            const modalContent = document.getElementById('modal-content');
-            const openModalButton = document.getElementById('open-modal-button');
-            const closeModalButton = document.getElementById('close-modal-button');
             const htmlEl = document.documentElement;
 
-            // --- Dark Mode Logic ---
+            // Función para aplicar el tema (clase 'dark' en <html>) y actualizar el ícono
             const applyTheme = (theme) => {
-                if (theme === 'dark') {
-                    htmlEl.classList.add('dark');
-                    darkIcon.classList.remove('hidden');
-                    lightIcon.classList.add('hidden');
-                } else {
-                    htmlEl.classList.remove('dark');
-                    darkIcon.classList.add('hidden');
-                    lightIcon.classList.remove('hidden');
-                }
+                htmlEl.classList.toggle('dark', theme === 'dark');
+                lightIcon.classList.toggle('hidden', theme === 'dark');
+                darkIcon.classList.toggle('hidden', theme !== 'dark');
             };
             
-            // Set initial theme
-            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-            applyTheme(savedTheme);
+            // Iniciar con tema claro por defecto. Si hay uno guardado, usarlo.
+            const savedTheme = localStorage.getItem('theme');
+            applyTheme(savedTheme || 'light');
 
+            // Listener para el botón que alterna el tema
             themeToggleButton.addEventListener('click', () => {
-                const newTheme = htmlEl.classList.contains('dark') ? 'light' : 'dark';
+                const currentTheme = htmlEl.classList.contains('dark') ? 'dark' : 'light';
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
                 localStorage.setItem('theme', newTheme);
                 applyTheme(newTheme);
             });
 
-            // --- Modal Logic ---
+            // --- Lógica del Modal Accesible ---
+            const modal = document.getElementById('value-proposition-modal');
+            const openModalButton = document.getElementById('open-modal-button');
+            const closeModalButton = document.getElementById('close-modal-button');
+            const focusableElementsString = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+            let firstFocusableEl;
+            let lastFocusableEl;
+
             const openModal = () => {
                 modal.classList.remove('hidden');
-                setTimeout(() => modal.classList.remove('modal-enter'), 10); // Start animation
+                
+                // Atrapar el foco dentro del modal
+                const focusableElements = modal.querySelectorAll(focusableElementsString);
+                firstFocusableEl = focusableElements[0];
+                lastFocusableEl = focusableElements[focusableElements.length - 1];
+                
+                // Mover foco al primer elemento (el botón de cerrar)
+                setTimeout(() => firstFocusableEl.focus(), 50);
+                
+                modal.addEventListener('keydown', trapFocus);
             };
 
             const closeModal = () => {
-                modal.classList.add('modal-leave');
-                modal.classList.add('modal-leave-active');
-                setTimeout(() => {
-                    modal.classList.add('hidden');
-                    modal.classList.remove('modal-leave', 'modal-leave-active');
-                    modal.classList.add('modal-enter'); // Reset for next open
-                }, 200);
+                modal.classList.add('hidden');
+                modal.removeEventListener('keydown', trapFocus);
+                // Devolver el foco al botón que abrió el modal
+                openModalButton.focus();
+            };
+            
+            const trapFocus = (e) => {
+                const isTabPressed = e.key === 'Tab' || e.keyCode === 9;
+                if (!isTabPressed) { return; }
+
+                if (e.shiftKey) { // Shift + Tab
+                    if (document.activeElement === firstFocusableEl) {
+                        lastFocusableEl.focus();
+                        e.preventDefault();
+                    }
+                } else { // Tab
+                    if (document.activeElement === lastFocusableEl) {
+                        firstFocusableEl.focus();
+                        e.preventDefault();
+                    }
+                }
             };
 
             openModalButton.addEventListener('click', openModal);
             closeModalButton.addEventListener('click', closeModal);
-
-            // Close modal by clicking on the background overlay
-            modal.addEventListener('click', (event) => {
-                if (event.target === modal) {
+            
+            // Cerrar con la tecla Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
                     closeModal();
                 }
             });
         });
     </script>
-
 </body>
 </html>
