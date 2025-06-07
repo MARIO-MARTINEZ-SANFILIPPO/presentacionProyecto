@@ -23,13 +23,6 @@
         .bg-change {
             transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
         }
-        .unselectable {
-            pointer-events: none;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-        }
         /* Animaciones para el Modal/Pop-up */
         .modal-enter { opacity: 0; transform: scale(0.95); }
         .modal-enter-active { opacity: 1; transform: scale(1); transition: all 0.2s ease-out; }
@@ -95,23 +88,31 @@
             <h2 id="team-title" class="text-3xl font-bold text-center mb-10 text-gray-900 dark:text-white">Nuestro Equipo</h2>
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Se movió la animación de hover al contenedor ARTICLE para evitar conflictos -->
-                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transition-transform duration-300 hover:scale-105 bg-change group">
-                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" src="mario.png" alt="Foto de Mario Martinez, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=MM';">
+                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transition-shadow duration-300 hover:shadow-2xl bg-change group">
+                    <div class="overflow-hidden rounded-full mx-auto w-32 h-32 mb-4">
+                        <img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" src="mario.png" alt="Foto de Mario Martinez, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/128x128/EFEFEF/333333?text=MM';">
+                    </div>
                     <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Mario Martinez</h3>
                     <p class="text-gray-500 dark:text-slate-400">Analista/Programador Genexus</p>
                 </article>
-                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transition-transform duration-300 hover:scale-105 bg-change group">
-                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" src="bruno.png" alt="Foto de Bruno Gonzalez, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=BG';">
+                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transition-shadow duration-300 hover:shadow-2xl bg-change group">
+                     <div class="overflow-hidden rounded-full mx-auto w-32 h-32 mb-4">
+                        <img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" src="bruno.png" alt="Foto de Bruno Gonzalez, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/128x128/EFEFEF/333333?text=BG';">
+                    </div>
                     <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Bruno Gonzalez</h3>
                     <p class="text-gray-500 dark:text-slate-400">DevOps | SysAdmin</p>
                 </article>
-                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transition-transform duration-300 hover:scale-105 bg-change group">
-                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" src="kamila.png" alt="Foto de Kamila Quintana, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=KQ';">
+                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transition-shadow duration-300 hover:shadow-2xl bg-change group">
+                     <div class="overflow-hidden rounded-full mx-auto w-32 h-32 mb-4">
+                        <img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" src="kamila.png" alt="Foto de Kamila Quintana, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/128x128/EFEFEF/333333?text=KQ';">
+                    </div>
                     <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Kamila Quintana</h3>
                     <p class="text-gray-500 dark:text-slate-400">Full-Stack Developer</p>
                 </article>
-                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transition-transform duration-300 hover:scale-105 bg-change group">
-                    <img class="w-40 h-60 rounded-xl mx-auto mb-4 object-cover unselectable" src="william.png" alt="Foto de William Machado, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/164x242/EFEFEF/333333?text=WM';">
+                <article class="text-center bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg transition-shadow duration-300 hover:shadow-2xl bg-change group">
+                     <div class="overflow-hidden rounded-full mx-auto w-32 h-32 mb-4">
+                        <img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" src="william.png" alt="Foto de William Machado, miembro del equipo." onerror="this.onerror=null;this.src='https://placehold.co/128x128/EFEFEF/333333?text=WM';">
+                    </div>
                     <h3 class="text-xl font-semibold text-gray-800 dark:text-white">William Machado</h3>
                     <p class="text-gray-500 dark:text-slate-400">Docente de Inglés</p>
                 </article>
@@ -121,7 +122,7 @@
         <section class="mb-16" aria-labelledby="diagram-title">
             <h2 id="diagram-title" class="text-3xl font-bold text-center mb-10 text-gray-900 dark:text-white">Diagrama de Contexto</h2>
             <figure class="bg-white dark:bg-slate-800 p-4 md:p-8 rounded-xl shadow-2xl bg-change">
-                <img src="diagrama.png" alt="Diagrama de flujo que muestra la interacción entre el usuario, el asistente de voz, el backend, la tienda y la API de pagos." class="w-full h-auto rounded-lg unselectable" oncontextmenu="return false;" onerror="this.onerror=null;this.src='https://placehold.co/1200x600/CCCCCC/333333?text=Diagrama no disponible';">
+                <img src="diagrama.png" alt="Diagrama de flujo que muestra la interacción entre el usuario, el asistente de voz, el backend, la tienda y la API de pagos." class="w-full h-auto rounded-lg" oncontextmenu="return false;" onerror="this.onerror=null;this.src='https://placehold.co/1200x600/CCCCCC/333333?text=Diagrama no disponible';">
             </figure>
         </section>
 
@@ -134,21 +135,21 @@
                     </p>
                 </div>
                 <figure class="mt-8 md:mt-0">
-                    <img src="utec.png" alt="Fachada de la Universidad Tecnológica del Uruguay." class="w-full h-auto rounded-lg shadow-md unselectable" oncontextmenu="return false;" onerror="this.onerror=null;this.src='https://placehold.co/600x400/CCCCCC/333333?text=Foto no disponible';">
+                    <img src="utec.png" alt="Fachada de la Universidad Tecnológica del Uruguay." class="w-full h-auto rounded-lg shadow-md" oncontextmenu="return false;" onerror="this.onerror=null;this.src='https://placehold.co/600x400/CCCCCC/333333?text=Foto no disponible';">
                 </figure>
             </div>
         </section>
     </main>
     
     <!-- Modal semántico con roles ARIA para accesibilidad -->
-    <div id="value-proposition-modal" class="hidden fixed inset-0 bg-black/60 z-30 flex items-center justify-center p-4 modal-enter" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <div id="modal-content" class="bg-white dark:bg-slate-800 rounded-xl shadow-2xl bg-change overflow-hidden w-full max-w-4xl relative">
+    <div id="value-proposition-modal" class="hidden fixed inset-0 bg-black/60 z-30 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div id="modal-content" class="bg-white dark:bg-slate-800 rounded-xl shadow-2xl bg-change overflow-hidden w-full max-w-4xl relative modal-enter">
             <button id="close-modal-button" aria-label="Cerrar ventana de Propuesta de Valor" class="absolute top-4 right-4 text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white transition-colors">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div class="grid md:grid-cols-2 items-center">
                 <div class="p-8 text-center flex flex-col items-center justify-center border-r border-gray-200 dark:border-slate-700">
-                    <img src="cliente.png" alt="Ilustración de dos personas, una con discapacidad visual y otra con discapacidad física, sosteniendo juntas el planeta tierra." class="w-full max-w-xs mx-auto unselectable" oncontextmenu="return false;" onerror="this.onerror=null;this.src='https://placehold.co/400x400/CCCCCC/333333?text=Cliente';">
+                    <img src="cliente.png" alt="Ilustración de dos personas, una con discapacidad visual y otra con discapacidad física, sosteniendo juntas el planeta tierra." class="w-full max-w-xs mx-auto" oncontextmenu="return false;" onerror="this.onerror=null;this.src='https://placehold.co/400x400/CCCCCC/333333?text=Cliente';">
                 </div>
                 <div class="p-8">
                     <h2 id="modal-title" class="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-white">Propuesta de Valor</h2>
@@ -196,7 +197,7 @@
     <!-- FOOTER: Etiqueta semántica para el pie de página. -->
     <footer class="bg-white dark:bg-slate-900 mt-16 py-6 border-t border-gray-200 dark:border-slate-800 bg-change">
         <div class="container mx-auto px-6 text-center text-gray-500 dark:text-slate-400">
-            <p>&copy; 2025 | UTEC - Licenciatura en Tecnologías de la Información</p>
+            <p>&copy; 2024 | UTEC - Licenciatura en Tecnologías de la Información</p>
         </div>
     </footer>
 
@@ -222,62 +223,56 @@
                 applyTheme(newTheme);
             });
 
+            // --- Lógica del Modal (Pop-up) ---
             const modal = document.getElementById('value-proposition-modal');
             const openModalButton = document.getElementById('open-modal-button');
             const closeModalButton = document.getElementById('close-modal-button');
-            const focusableElementsString = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-            let firstFocusableEl, lastFocusableEl;
+            
+            if (modal && openModalButton && closeModalButton) {
+                const focusableElementsString = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+                let firstFocusableEl, lastFocusableEl;
 
-            const openModal = () => {
-                modal.classList.remove('hidden');
-                modal.classList.remove('modal-enter');
-                modal.classList.add('modal-enter-active');
-                
-                const focusableElements = modal.querySelectorAll(focusableElementsString);
-                firstFocusableEl = focusableElements[0];
-                lastFocusableEl = focusableElements[focusableElements.length - 1];
-                
-                setTimeout(() => firstFocusableEl.focus(), 50);
-                modal.addEventListener('keydown', trapFocus);
-            };
+                const openModal = () => {
+                    modal.classList.remove('hidden');
+                    const focusableElements = modal.querySelectorAll(focusableElementsString);
+                    firstFocusableEl = focusableElements[0];
+                    lastFocusableEl = focusableElements[focusableElements.length - 1];
+                    setTimeout(() => firstFocusableEl.focus(), 50);
+                    modal.addEventListener('keydown', trapFocus);
+                };
 
-            const closeModal = () => {
-                modal.classList.remove('modal-enter-active');
-                modal.classList.add('modal-leave-active');
-                setTimeout(() => {
+                const closeModal = () => {
                     modal.classList.add('hidden');
-                    modal.classList.remove('modal-leave-active');
-                    modal.classList.add('modal-enter');
-                }, 200);
-                modal.removeEventListener('keydown', trapFocus);
-                openModalButton.focus();
-            };
-            
-            const trapFocus = (e) => {
-                const isTabPressed = e.key === 'Tab' || e.keyCode === 9;
-                if (!isTabPressed) return;
+                    modal.removeEventListener('keydown', trapFocus);
+                    if (openModalButton) openModalButton.focus();
+                };
+                
+                const trapFocus = (e) => {
+                    const isTabPressed = e.key === 'Tab' || e.keyCode === 9;
+                    if (!isTabPressed) return;
 
-                if (e.shiftKey) {
-                    if (document.activeElement === firstFocusableEl) {
-                        lastFocusableEl.focus();
-                        e.preventDefault();
+                    if (e.shiftKey) { // Shift + Tab
+                        if (document.activeElement === firstFocusableEl) {
+                            lastFocusableEl.focus();
+                            e.preventDefault();
+                        }
+                    } else { // Tab
+                        if (document.activeElement === lastFocusableEl) {
+                            firstFocusableEl.focus();
+                            e.preventDefault();
+                        }
                     }
-                } else {
-                    if (document.activeElement === lastFocusableEl) {
-                        firstFocusableEl.focus();
-                        e.preventDefault();
-                    }
-                }
-            };
+                };
 
-            openModalButton.addEventListener('click', openModal);
-            closeModalButton.addEventListener('click', closeModal);
-            
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-                    closeModal();
-                }
-            });
+                openModalButton.addEventListener('click', openModal);
+                closeModalButton.addEventListener('click', closeModal);
+                
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                        closeModal();
+                    }
+                });
+            }
         });
     </script>
 </body>
