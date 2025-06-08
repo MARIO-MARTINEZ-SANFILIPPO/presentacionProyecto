@@ -9,28 +9,37 @@
   </script>
 
 <style>
-  :fullscreen img,
-  :-webkit-full-screen img {
-    width: 100%;
-    height: 100vh;
-    object-fit: contain;
-    max-width: unset;
-    max-height: unset;
+  :fullscreen #slide-controls,
+  :-webkit-full-screen #slide-controls {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 0.5rem 1rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  :fullscreen body {
+    background: black;
   }
 </style>
+
 
 
   <script type="text/javascript">document.oncontextmenu = function(){return false;}</script>
 </head>
 <body class="bg-gray-50 dark:bg-slate-900 text-gray-800 dark:text-white">
 
-  <main class="container mx-auto px-6 py-20">
+<main class="min-h-screen flex flex-col justify-center items-center px-6">
     <h1 class="text-3xl font-bold mb-8 text-center">Presentación del Proyecto</h1>
 
     <div id="slide-container" class="flex flex-col items-center">
      <img id="slide" src="1.png" alt="Diapositiva actual" class="w-full object-contain rounded shadow-md transition-all duration-300" />
 
-      <div class="mt-6 flex flex-wrap justify-center gap-4">
+    <div id="slide-controls" class="mt-6 flex flex-wrap justify-center gap-4 transition-all">
         <button id="prev-slide" class="bg-gray-300 dark:bg-slate-700 px-4 py-2 rounded hover:bg-gray-400 dark:hover:bg-slate-600">
           ← Anterior
         </button>
