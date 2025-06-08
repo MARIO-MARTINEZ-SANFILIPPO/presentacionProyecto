@@ -89,14 +89,16 @@
     };
 
     fullscreenBtn.onclick = () => {
+    const img = document.getElementById('slide');
     if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
+      img.requestFullscreen();
       fullscreenBtn.textContent = 'Salir de pantalla completa';
     } else {
       document.exitFullscreen();
       fullscreenBtn.textContent = 'Pantalla completa';
     }
   };
+
 
   </script>
 
