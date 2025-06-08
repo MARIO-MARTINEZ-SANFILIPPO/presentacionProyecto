@@ -9,16 +9,20 @@
   </script>
 
   <style>
-    :fullscreen #slide {
-      width: 100%;
-      height: 100vh;
-      object-fit: contain;
-    }
+  :fullscreen #slide,
+  :-webkit-full-screen #slide {
+    width: 100vw;
+    height: 100vh;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+  }
 
-    :fullscreen body {
-      background: black;
-    }
-  </style>
+  :fullscreen body {
+    background: black;
+  }
+</style>
+
 
   <script type="text/javascript">document.oncontextmenu = function(){return false;}</script>
 </head>
@@ -28,7 +32,7 @@
     <h1 class="text-3xl font-bold mb-8 text-center">Presentación del Proyecto</h1>
 
     <div id="slide-container" class="flex flex-col items-center">
-      <img id="slide" src="1.png" alt="Diapositiva actual" class="w-full max-w-5xl object-contain rounded shadow-md transition-all duration-300" />
+      <img id="slide" src="1.png" alt="Diapositiva actual" class="object-contain rounded shadow-md transition-all duration-300" />
       <p id="slide-indicator" class="mt-2 text-sm text-gray-500 dark:text-gray-400">1 / 10</p>
     </div>
   </main>
