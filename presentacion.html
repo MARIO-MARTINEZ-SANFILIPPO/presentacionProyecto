@@ -9,20 +9,19 @@
   </script>
 
   <style>
-  :fullscreen #slide,
-  :-webkit-full-screen #slide {
-    width: 100vw;
-    height: 100vh;
-    object-fit: contain;
-    margin: 0 auto;
-    display: block;
-  }
+    :fullscreen #slide,
+    :-webkit-full-screen #slide {
+      width: 100vw;
+      height: 100vh;
+      object-fit: contain;
+      margin: 0 auto;
+      display: block;
+    }
 
-  :fullscreen body {
-    background: black;
-  }
-</style>
-
+    :fullscreen body {
+      background: black;
+    }
+  </style>
 
   <script type="text/javascript">document.oncontextmenu = function(){return false;}</script>
 </head>
@@ -30,7 +29,8 @@
 
   <main class="min-h-screen flex flex-col justify-center items-center px-6">
     <div id="slide-container" class="flex flex-col items-center">
-      <img id="slide" src="1.png" alt="Diapositiva actual" class="w-full max-w-4xl h-[80vh] object-contain rounded shadow-md transition-all duration-300" />
+      <img id="slide" src="1.png" alt="Diapositiva actual"
+        class="w-full max-w-4xl object-contain rounded shadow-md transition-all duration-300 h-[80vh]" />
       <p id="slide-indicator" class="mt-2 text-sm text-gray-500 dark:text-gray-400">1 / 10</p>
     </div>
   </main>
@@ -94,18 +94,22 @@
       const el = document.documentElement;
       if (!document.fullscreenElement) {
         el.requestFullscreen();
-        fullscreenBtn.textContent = 'Salir de pantalla completa';
       } else {
         document.exitFullscreen();
-        fullscreenBtn.textContent = 'Pantalla completa';
       }
     };
 
-    // Actualizar botón al salir de fullscreen
     document.addEventListener('fullscreenchange', () => {
-      fullscreenBtn.textContent = document.fullscreenElement
+      const isFullscreen = !!document.fullscreenElement;
+      fullscreenBtn.textContent = isFullscreen
         ? 'Salir de pantalla completa'
         : 'Pantalla completa';
+
+      if (isFullscreen) {
+        slide.classList.remove('h-[80vh]');
+      } else {
+        slide.classList.add('h-[80vh]');
+      }
     });
   </script>
 
