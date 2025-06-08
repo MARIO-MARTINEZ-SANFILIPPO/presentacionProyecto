@@ -4,38 +4,94 @@
   <meta charset="UTF-8">
   <title>Presentación del Proyecto</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script type="text/javascript">document.oncontextmenu = function(){return false;}</script>
   <script>
     tailwind.config = { darkMode: 'class' };
   </script>
+  <script type="text/javascript">document.oncontextmenu = function(){return false;}</script>
 </head>
 <body class="bg-gray-50 dark:bg-slate-900 text-gray-800 dark:text-white">
+
   <main class="container mx-auto px-6 py-20">
     <h1 class="text-3xl font-bold mb-8 text-center">Presentación del Proyecto</h1>
 
-    <div class="flex flex-col gap-10 items-center">
-      <img src="1.png" alt="Diapositiva 1" class="w-full max-w-4xl rounded shadow-md">
-      <img src="2.png" alt="Diapositiva 2" class="w-full max-w-4xl rounded shadow-md">
-      <img src="3.png" alt="Diapositiva 3" class="w-full max-w-4xl rounded shadow-md">
-      <img src="4.png" alt="Diapositiva 1" class="w-full max-w-4xl rounded shadow-md">
-      <img src="5.png" alt="Diapositiva 2" class="w-full max-w-4xl rounded shadow-md">
-      <img src="6.png" alt="Diapositiva 3" class="w-full max-w-4xl rounded shadow-md">
-      <img src="7.png" alt="Diapositiva 1" class="w-full max-w-4xl rounded shadow-md">
-      <img src="8.png" alt="Diapositiva 2" class="w-full max-w-4xl rounded shadow-md">
-      <img src="9.png" alt="Diapositiva 3" class="w-full max-w-4xl rounded shadow-md">
-      <img src="10.png" alt="Diapositiva 3" class="w-full max-w-4xl rounded shadow-md">
+    <div id="slide-container" class="flex flex-col items-center">
+      <img id="slide" src="1.png" alt="Diapositiva actual" class="w-full max-w-4xl rounded shadow-md">
+
+      <div class="mt-6 flex flex-wrap justify-center gap-4">
+        <button id="prev-slide" class="bg-gray-300 dark:bg-slate-700 px-4 py-2 rounded hover:bg-gray-400 dark:hover:bg-slate-600">
+          ← Anterior
+        </button>
+        <button id="next-slide" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+          Siguiente →
+        </button>
+        <button id="fullscreen-btn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+          Pantalla completa
+        </button>
+      </div>
+
+      <p id="slide-indicator" class="mt-2 text-sm text-gray-500 dark:text-gray-400">1 / 10</p>
     </div>
   </main>
 
-<a href="techRandomSS.html" class="fixed bottom-6 right-6 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-700 transition z-50">
-  ← Volver
-</a>
+  <!-- Botón flotante de volver -->
+  <a href="techRandomSS.html" class="fixed bottom-6 right-6 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-700 transition z-50">
+    ← Volver
+  </a>
 
-    <!-- FOOTER: Etiqueta semántica para el pie de página. -->
-    <footer class="bg-white dark:bg-slate-900 mt-16 py-6 border-t border-gray-200 dark:border-slate-800 bg-change">
-        <div class="container mx-auto px-6 text-center text-gray-500 dark:text-slate-400">
-            <p>&copy; 2025 | UTEC - Licenciatura en Tecnologías de la Información</p>
-        </div>
-    </footer>
+  <!-- FOOTER -->
+  <footer class="bg-white dark:bg-slate-900 mt-16 py-6 border-t border-gray-200 dark:border-slate-800">
+    <div class="container mx-auto px-6 text-center text-gray-500 dark:text-slate-400">
+      <p>&copy; 2025 | UTEC - Licenciatura en Tecnologías de la Información</p>
+    </div>
+  </footer>
+
+  <!-- Script de navegación -->
+  <script>
+    const slide = document.getElementById('slide');
+    const prevBtn = document.getElementById('prev-slide');
+    const nextBtn = document.getElementById('next-slide');
+    const indicator = document.getElementById('slide-indicator');
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+    const totalSlides = 10;
+    let current = 1;
+
+    const updateSlide = () => {
+      slide.src = `${current}.png`;
+      indicator.textContent = `${current} / ${totalSlides}`;
+    };
+
+    prevBtn.onclick = () => {
+      if (current > 1) {
+        current--;
+        updateSlide();
+      }
+    };
+
+    nextBtn.onclick = () => {
+      if (current < totalSlides) {
+        current++;
+        updateSlide();
+      }
+    };
+
+    fullscreenBtn.onclick = () => {
+      const el = document.getElementById('slide-container');
+      if (el.requestFullscreen) el.requestFullscreen();
+      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      else if (el.msRequestFullscreen) el.msRequestFullscreen();
+    };
+  </script>
+
+<script>
+  const htmlEl = document.documentElement;
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    htmlEl.classList.add('dark');
+  } else {
+    htmlEl.classList.remove('dark');
+  }
+</script>
+
 </body>
 </html>
