@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: El Panorama de la Discapacidad Visual en Uruguay (Datos 2023)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript">document.oncontextmenu = function(){return false;}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 45vh;
+            width: 100%;
+            max-height: 500px;
+        }
+    </style>
+   
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <main class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-black text-[#003f5c] mb-2">Discapacidad Visual en Uruguay</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Un análisis actualizado con los datos oficiales del Censo 2023 para entender la población, las tendencias y las oportunidades.</p>
+        </header>
+
+        <section id="hook" class="mb-16">
+            <div class="bg-white rounded-2xl shadow-lg p-8 text-center border-t-8 border-[#ffa600]">
+                <p class="text-2xl font-bold text-gray-700 mb-2">Según el Censo 2023, en Uruguay hay</p>
+                <p class="text-7xl md:text-8xl font-black text-[#003f5c] my-4">108,483</p>
+                <p class="text-2xl font-bold text-gray-700">personas con dificultad para ver.</p>
+                <p class="text-sm text-gray-500 mt-4">Fuente: Censo 2023, Instituto Nacional de Estadística (INE).</p>
+            </div>
+        </section>
+
+        <section id="context" class="mb-16">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-[#003f5c]">El Contexto: La Discapacidad Visual es la más Prevalente</h2>
+                <p class="text-md text-gray-600 max-w-2xl mx-auto mt-2">Los nuevos datos muestran que, de todos los dominios de discapacidad medidos, la dificultad para ver es la que afecta a un mayor porcentaje de la población uruguaya.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                    <p class="text-6xl font-extrabold text-[#2f4b7c]">6,6%</p>
+                    <p class="text-xl font-bold mt-2">De la población tiene al menos una discapacidad</p>
+                    <p class="text-xs text-gray-500 mt-1">Fuente: Censo 2023 (INE)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                    <p class="text-6xl font-extrabold text-[#665191]">3,1%</p>
+                    <p class="text-xl font-bold mt-2">De la población tiene dificultad para ver</p>
+                     <p class="text-xs text-gray-500 mt-1">Fuente: Censo 2023 (INE)</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="full-spectrum" class="mb-16 bg-white rounded-lg shadow-md p-6 md:p-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-[#003f5c]">La Evolución de las Cifras</h2>
+                <p class="text-md text-gray-600 max-w-3xl mx-auto mt-2">El dato del Censo 2023 ofrece una cifra oficial y actualizada que se sitúa entre el conteo de casos severos de 2011 y las estimaciones más amplias de las organizaciones.</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="comparisonChart"></canvas>
+            </div>
+        </section>
+        
+        <section id="opportunity" class="mb-16">
+            <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-[#003f5c]">Redefiniendo la Oportunidad de Mercado</h2>
+                <p class="text-md text-gray-600 max-w-3xl mx-auto mt-2">Con los datos actualizados, podemos afinar nuestra segmentación para enfocar las soluciones de manera más efectiva.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-[#ff7c43]">
+                    <h3 class="text-xl font-bold text-[#003f5c]">Mercado Total (Prevalencia 2023)</h3>
+                    <p class="text-4xl font-extrabold my-2">~108,000 personas</p>
+                    <p class="text-gray-600">Este es el universo total de personas con alguna dificultad para ver según el Censo 2023. Representa el mercado extendido que se beneficia de cualquier mejora en accesibilidad y diseño inclusivo.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-[#d45087]">
+                    <h3 class="text-xl font-bold text-[#003f5c]">Mercado Núcleo (Casos Severos)</h3>
+                    <p class="text-4xl font-extrabold my-2">~61,000 personas</p>
+                    <p class="text-gray-600">Compuesto por personas con ceguera y baja visión grave. Sigue siendo la mejor estimación para el grupo con necesidades más críticas (basado en Censo 2011) y los adoptantes tempranos de tecnología.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="relevance" class="mb-16 text-center bg-white rounded-lg shadow-md p-6 md:p-8">
+             <h2 class="text-3xl font-bold text-[#003f5c]">Importancia y Relevancia de los Datos</h2>
+             <p class="text-md text-gray-600 max-w-3xl mx-auto mt-4">Los datos del Censo 2023 son fundamentales. Reemplazan estimaciones con una **cifra oficial y actual**, otorgando una credibilidad incuestionable al proyecto. Confirman que la dificultad visual es un problema de gran magnitud en Uruguay y, al identificarla como la **discapacidad más prevalente**, subrayan la urgencia y la importancia de desarrollar soluciones de accesibilidad efectivas y de amplio alcance.</p>
+        </section>
+
+        <footer class="text-center pt-8 border-t">
+            <p class="text-sm text-gray-500">Fuentes de Datos: Instituto Nacional de Estadística (Censo 2011 y Censo 2023), Fundación Braille del Uruguay (FBU), Unión Nacional de Ciegos del Uruguay (UNCU).</p>
+        </footer>
+
+        <!-- Botón flotante de volver -->
+          <a href="techRandomSS.html" class="fixed bottom-6 right-6 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-700 transition z-50">
+            ← Volver
+        </a>
+
+    </main>
+
+    <script>
+        function wrapLabel(label) {
+            const maxLength = 16;
+            if (typeof label !== 'string' || label.length <= maxLength) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).trim().length > maxLength && currentLine.length > 0) {
+                    lines.push(currentLine);
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            }
+            if (currentLine.length > 0) {
+                lines.push(currentLine);
+            }
+            return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            }
+            return label;
+        };
+        
+        const sharedChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        font: {
+                           size: 14,
+                           family: 'Inter'
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    },
+                    backgroundColor: '#003f5c',
+                    titleFont: {
+                        size: 16,
+                        weight: 'bold',
+                        family: 'Inter'
+                    },
+                    bodyFont: {
+                        size: 14,
+                        family: 'Inter'
+                    },
+                    padding: 10,
+                    cornerRadius: 4,
+                    displayColors: true,
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                       font: {
+                           size: 12,
+                           family: 'Inter'
+                       },
+                       callback: function(value) {
+                           return value.toLocaleString('es-UY');
+                       }
+                    }
+                },
+                x: {
+                    ticks: {
+                        font: {
+                           size: 12,
+                           family: 'Inter'
+                        }
+                    }
+                }
+            }
+        };
+
+        const comparisonChartCtx = document.getElementById('comparisonChart').getContext('2d');
+        const comparisonLabels = [
+            'Censo 2011 (Casos Severos)', 
+            'Estimación FBU', 
+            'Censo 2023 (Prevalencia Total)'
+        ];
+        new Chart(comparisonChartCtx, {
+            type: 'bar',
+            data: {
+                labels: comparisonLabels.map(wrapLabel),
+                datasets: [{
+                    label: 'Número de Personas',
+                    data: [61319, 140000, 108483],
+                    backgroundColor: ['#d45087', '#ff7c43', '#003f5c'],
+                    borderColor: ['#d45087', '#ff7c43', '#003f5c'],
+                    borderWidth: 1
+                }]
+            },
+            options: { ...sharedChartOptions }
+        });
+    </script>
+
+</body>
+</html>
