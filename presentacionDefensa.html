@@ -284,8 +284,12 @@
                 <span>Volver</span>
             </a>
 
-            <!-- Slide Controls -->
+            <!-- View and Slide Controls -->
             <div class="flex items-center gap-4">
+                 <!-- Fullscreen Button -->
+                <button id="fullscreen-btn" title="Pantalla Completa" class="bg-white/10 hover:bg-white/20 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                    <i class="fas fa-expand"></i>
+                </button>
                 <button id="prev-btn" class="bg-white/10 hover:bg-white/20 text-white font-bold py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
                     <i class="fas fa-arrow-left"></i>
                 </button>
@@ -299,15 +303,18 @@
     </div>
 
     <script>
+        const presentationContainer = document.getElementById('presentation-container');
         const slides = document.querySelectorAll('.slide');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         const slideCounter = document.getElementById('slide-counter');
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        const fullscreenIcon = fullscreenBtn.querySelector('i');
         let currentSlide = 0;
 
         function showSlide(index) {
             // Hide all slides
-            slides.forEach((slide, i) => {
+            slides.forEach((slide) => {
                 slide.classList.remove('active');
             });
             
@@ -321,6 +328,38 @@
             prevBtn.disabled = index === 0;
             nextBtn.disabled = index === slides.length - 1;
         }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
+                if (presentationContainer.requestFullscreen) {
+                    presentationContainer.requestFullscreen();
+                } else if (presentationContainer.webkitRequestFullscreen) { /* Safari */
+                    presentationContainer.webkitRequestFullscreen();
+                } else if (presentationContainer.msRequestFullscreen) { /* IE11 */
+                    presentationContainer.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) { /* Safari */
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { /* IE11 */
+                    document.msExitFullscreen();
+                }
+            }
+        }
+        
+        function updateFullscreenIcon() {
+            if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+                fullscreenIcon.classList.remove('fa-expand');
+                fullscreenIcon.classList.add('fa-compress');
+            } else {
+                fullscreenIcon.classList.remove('fa-compress');
+                fullscreenIcon.classList.add('fa-expand');
+            }
+        }
+
+        // --- EVENT LISTENERS ---
 
         nextBtn.addEventListener('click', () => {
             if (currentSlide < slides.length - 1) {
@@ -336,12 +375,23 @@
             }
         });
         
+        fullscreenBtn.addEventListener('click', toggleFullScreen);
+
+        // Listen for fullscreen changes to update icon
+        document.addEventListener('fullscreenchange', updateFullscreenIcon);
+        document.addEventListener('webkitfullscreenchange', updateFullscreenIcon);
+        document.addEventListener('mozfullscreenchange', updateFullscreenIcon);
+        document.addEventListener('MSFullscreenChange', updateFullscreenIcon);
+        
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') {
                 nextBtn.click();
             } else if (e.key === 'ArrowLeft') {
                 prevBtn.click();
+            } else if (e.key === 'f' || e.key === 'F11') {
+                e.preventDefault(); // Prevent default browser behavior
+                toggleFullScreen();
             }
         });
 
