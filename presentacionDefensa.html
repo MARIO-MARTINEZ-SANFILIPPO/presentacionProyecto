@@ -18,12 +18,13 @@
             display: none;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
+            transform: scale(0.95);
         }
         .slide.active {
             display: flex;
             opacity: 1;
+            transform: scale(1);
         }
-        /* Custom styles for better presentation */
         .glassmorphism {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -33,14 +34,11 @@
         .text-shadow {
             text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
         }
-        .icon-bg {
-            background-color: rgba(0, 191, 255, 0.1);
-        }
         .no-underline {
             text-decoration: none;
         }
         
-        /* Styles for fullscreen mode to expand the container */
+        /* Styles for fullscreen mode */
         #presentation-container:fullscreen {
             max-width: none;
             width: 100%;
@@ -58,6 +56,25 @@
             width: 100%;
             height: 100%;
             border-radius: 0;
+        }
+
+        /* --- FIX: Scale slide content in fullscreen --- */
+        #presentation-container:fullscreen .slide {
+             /* Use a responsive font-size based on viewport width */
+            font-size: 1.7vw;
+        }
+        
+        #presentation-container:fullscreen h1.text-5xl {
+             font-size: 3.5rem; /* Adjust specific large headers if needed */
+        }
+        
+        #presentation-container:fullscreen h1.md\:text-6xl {
+             font-size: 4.5rem;
+        }
+
+        /* --- FIX: Keep navigation bar at a fixed size --- */
+        #presentation-container:fullscreen .navigation-bar {
+            font-size: 1rem; /* Reset font-size for the nav bar to keep it stable */
         }
 
     </style>
@@ -298,7 +315,7 @@
         </div>
 
         <!-- NAVIGATION -->
-        <div class="absolute bottom-0 left-0 right-0 p-4 flex justify-between items-center">
+        <div class="navigation-bar absolute bottom-0 left-0 right-0 p-4 flex justify-between items-center">
             <!-- Back Button -->
             <a href="#" onclick="window.history.back(); return false;" title="Volver a la página anterior" class="bg-white/10 hover:bg-white/20 text-white font-bold py-2 px-4 rounded-lg transition-colors no-underline flex items-center">
                 <i class="fas fa-chevron-left mr-2"></i>
