@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack Tecnológico - Asistente de Compras por Voz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-4 sm:p-6 md:p-8">
+    <div class="max-w-7xl mx-auto">
+        <div class="mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Stack Tecnológico del Proyecto</h1>
+            <p class="text-lg text-gray-600">Asistente de Compras por Voz</p>
+        </div>
+        
+        <div class="shadow-lg rounded-xl overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-700">
+                    <thead class="text-xs text-white uppercase bg-gray-700">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">Categoría</th>
+                            <th scope="col" class="px-6 py-3">Componente</th>
+                            <th scope="col" class="px-6 py-3">Tecnología / Herramienta</th>
+                            <th scope="col" class="px-6 py-3">Propósito Principal</th>
+                            <th scope="col" class="px-6 py-3">Justificación de Elección</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Frontend -->
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="px-6 py-4 font-bold text-gray-900 align-top" rowspan="3">Frontend y Voz</td>
+                            <td class="px-6 py-4 font-semibold">Aplicación Móvil</td>
+                            <td class="px-6 py-4">Flutter (Dart) + Android Studio</td>
+                            <td class="px-6 py-4">Desarrollo de la app móvil accesible, con interfaz optimizada para comandos por voz.</td>
+                            <td class="px-6 py-4">Framework moderno y multiplataforma. Facilita la creación de interfaces consistentes y la integración con APIs nativas de accesibilidad.</td>
+                        </tr>
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold">Reconocimiento de Voz (STT)</td>
+                            <td class="px-6 py-4">Android Speech API</td>
+                            <td class="px-6 py-4">Conversión de la voz del usuario a texto para ser procesado por el NLU.</td>
+                            <td class="px-6 py-4">Integración nativa con el sistema operativo, optimizada para el rendimiento en el dispositivo y sin costos adicionales.</td>
+                        </tr>
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold">Síntesis de Voz (TTS)</td>
+                            <td class="px-6 py-4">Android Text-to-Speech API</td>
+                            <td class="px-6 py-4">Proporciona las respuestas del asistente de forma audible y clara para el usuario.</td>
+                            <td class="px-6 py-4">Solución robusta, nativa y personalizable por el usuario en su propio dispositivo, respetando sus preferencias de accesibilidad.</td>
+                        </tr>
+
+                        <!-- Backend & AI -->
+                        <tr class="bg-gray-200">
+                            <td class="px-6 py-3 font-bold text-gray-900" colspan="5">Backend e Inteligencia Artificial</td>
+                        </tr>
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="px-6 py-4 font-bold text-gray-900 align-top" rowspan="3">Backend & IA</td>
+                            <td class="px-6 py-4 font-semibold">Asistente Conversacional (NLU)</td>
+                            <td class="px-6 py-4">Rasa Open Source</td>
+                            <td class="px-6 py-4">Procesamiento de Lenguaje Natural para entender las intenciones del usuario y gestionar el diálogo.</td>
+                            <td class="px-6 py-4">Open-source, alto grado de personalización para el español uruguayo y control total sobre el modelo y los datos.</td>
+                        </tr>
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold">API REST</td>
+                            <td class="px-6 py-4">Java (Spring Boot)</td>
+                            <td class="px-6 py-4">Backend centralizado que conecta la app, la base de datos y la lógica de negocio (usuarios, pedidos).</td>
+                            <td class="px-6 py-4">Ecosistema maduro, robusto y escalable, ideal para la creación de APIs seguras y de alto rendimiento.</td>
+                        </tr>
+                         <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold">Base de Datos</td>
+                            <td class="px-6 py-4">Google Cloud SQL (PostgreSQL)</td>
+                            <td class="px-6 py-4">Almacenamiento persistente, escalable y seguro para productos, usuarios e historial de pedidos.</td>
+                            <td class="px-6 py-4">Servicio gestionado que reduce la carga administrativa, con alta disponibilidad, backups automáticos y seguridad integrada.</td>
+                        </tr>
+
+                        <!-- Infraestructura & DevOps -->
+                        <tr class="bg-gray-200">
+                            <td class="px-6 py-3 font-bold text-gray-900" colspan="5">Infraestructura, Despliegue y DevOps</td>
+                        </tr>
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="px-6 py-4 font-bold text-gray-900 align-top" rowspan="3">Infraestructura & DevOps</td>
+                            <td class="px-6 py-4 font-semibold">Contenerización</td>
+                            <td class="px-6 py-4">Docker & Docker Compose</td>
+                            <td class="px-6 py-4">Estandarización de los entornos de desarrollo y producción para Rasa, backend y otros servicios.</td>
+                            <td class="px-6 py-4">Garantiza la portabilidad, consistencia y reproducibilidad del sistema, simplificando el despliegue y las pruebas.</td>
+                        </tr>
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold">Despliegue en la Nube</td>
+                            <td class="px-6 py-4">Google Cloud Run</td>
+                            <td class="px-6 py-4">Servicio sin servidor (serverless) para ejecutar los contenedores en un entorno escalable y gestionado.</td>
+                            <td class="px-6 py-4">Modelo de pago por uso, escalado automático a cero y gestión simplificada. Ideal para empezar y crecer sin grandes costos fijos.</td>
+                        </tr>
+                         <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold">CI/CD y Control de Versiones</td>
+                            <td class="px-6 py-4">Git + GitHub (GitHub Actions)</td>
+                            <td class="px-6 py-4">Automatización de las pruebas, construcción de contenedores y despliegues en la nube.</td>
+                            <td class="px-6 py-4">Ecosistema integrado y estándar en la industria. Facilita la colaboración y asegura la calidad del código y los modelos.</td>
+                        </tr>
+
+                         <!-- Soporte y Calidad -->
+                        <tr class="bg-gray-200">
+                            <td class="px-6 py-3 font-bold text-gray-900" colspan="5">Herramientas de Soporte y Calidad</td>
+                        </tr>
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="px-6 py-4 font-bold text-gray-900 align-top" rowspan="4">Soporte y Calidad</td>
+                            <td class="px-6 py-4 font-semibold">Testing del Modelo NLU</td>
+                            <td class="px-6 py-4">Python + Tkinter + Rasa Test</td>
+                            <td class="px-6 py-4">Creación de una app de escritorio para testeo de intents, precisión y confianza del modelo.</td>
+                            <td class="px-6 py-4">Permite realizar pruebas de calidad del modelo de forma rápida y visual, generando métricas para su mejora continua.</td>
+                        </tr>
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold">Monitoreo y Observabilidad</td>
+                            <td class="px-6 py-4">Prometheus + Grafana</td>
+                            <td class="px-6 py-4">Recolección de métricas de rendimiento del bot y del backend. Visualización en dashboards.</td>
+                            <td class="px-6 py-4">Estándar de facto para la observabilidad en sistemas nativos de la nube. Permite detectar problemas proactivamente.</td>
+                        </tr>
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold">Monitoreo de Seguridad</td>
+                            <td class="px-6 py-4">Wazuh / Falco</td>
+                            <td class="px-6 py-4">Detección de intrusiones, amenazas y comportamiento anómalo en los contenedores.</td>
+                            <td class="px-6 py-4">Soluciones open-source potentes para la seguridad en tiempo de ejecución, alineadas con una arquitectura de contenedores.</td>
+                        </tr>
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold">Panel Administrativo</td>
+                            <td class="px-6 py-4">React / Vue.js (a definir)</td>
+                            <td class="px-6 py-4">Interfaz web para la gestión de usuarios, pedidos y configuración del sistema.</td>
+                            <td class="px-6 py-4">Frameworks modernos de JavaScript que permiten construir interfaces de usuario interactivas y eficientes.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
