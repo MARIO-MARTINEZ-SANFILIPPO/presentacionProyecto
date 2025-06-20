@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Flujo de Comunicación y Seguridad</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .flow-card {
+            background-color: white;
+            border-left: 4px solid #3b82f6; /* Blue-500 */
+        }
+        .arrow {
+            color: #9ca3af; /* Gray-400 */
+        }
+        /* Modal styles */
+        .modal {
+            transition: opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-4 sm:p-8">
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800">Flujo de Comunicación y Seguridad</h1>
+            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Arquitectura del "Asistente de Compras por Voz" y su interacción segura con la API de TATA.</p>
+            <button id="open-modal-btn" class="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                <i class="fas fa-info-circle mr-2"></i>Ver Detalles Técnicos
+            </button>
+        </header>
+
+        <div class="space-y-8">
+            <!-- Step 1 -->
+            <div class="flow-card p-6 rounded-xl shadow-md">
+                <div class="flex items-center">
+                    <div class="flex items-center justify-center bg-blue-100 rounded-full w-16 h-16 mr-6">
+                        <i class="fas fa-user-microphone text-3xl text-blue-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">Paso 1: El Usuario Inicia la Interacción</h3>
+                        <p class="text-gray-600">El usuario realiza un comando de voz desde la aplicación móvil. Por ejemplo: <em class="text-gray-800">"Buscar milanesas de pollo"</em>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center">
+                <i class="fas fa-arrow-down text-3xl arrow"></i>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="flow-card p-6 rounded-xl shadow-md">
+                <div class="flex items-center">
+                    <div class="flex items-center justify-center bg-blue-100 rounded-full w-16 h-16 mr-6">
+                        <i class="fas fa-server text-3xl text-blue-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">Paso 2: La App se Comunica con Nuestro Backend</h3>
+                        <p class="text-gray-600">La aplicación móvil **NUNCA** contacta directamente a la API de TATA. En su lugar, envía la solicitud a nuestro propio backend (API Spring Boot) de forma segura.</p>
+                        <div class="mt-2 flex items-center text-sm bg-green-100 text-green-800 p-2 rounded-md">
+                            <i class="fas fa-lock mr-2"></i>
+                            <span>Toda la comunicación está cifrada con <strong>HTTPS</strong>.</span>
+                        </div>
+                        <div class="mt-2 flex items-center text-sm bg-orange-100 text-orange-800 p-2 rounded-md">
+                            <i class="fas fa-shield-virus mr-2"></i>
+                            <span>Se incluye un token de <strong>Play Integrity API</strong> para verificar que la solicitud proviene de la app genuina.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center">
+                <i class="fas fa-arrow-down text-3xl arrow"></i>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="flow-card p-6 rounded-xl shadow-md">
+                <div class="flex items-center">
+                    <div class="flex items-center justify-center bg-blue-100 rounded-full w-16 h-16 mr-6">
+                        <i class="fas fa-cogs text-3xl text-blue-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">Paso 3: Nuestro Backend Procesa y Autentica</h3>
+                        <p class="text-gray-600">Nuestro servidor recibe la solicitud. Aquí ocurre la "magia" de la seguridad:</p>
+                        <ul class="list-disc list-inside mt-2 text-gray-600 space-y-1">
+                            <li><strong>Verifica la integridad de la app</strong> usando el token de Play Integrity. Si no es válido, la petición se rechaza.</li>
+                            <li>Verifica la identidad del usuario de nuestra app (con su propio token de sesión).</li>
+                            <li>Prepara la llamada a la API de TATA.</li>
+                            <li class="font-semibold text-red-600">Utiliza las credenciales seguras (API Key o token JWT) que TATA nos proporcionó. Estas credenciales están almacenadas de forma segura en nuestro servidor.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center">
+                <i class="fas fa-arrow-down text-3xl arrow"></i>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="flow-card p-6 rounded-xl shadow-md">
+                <div class="flex items-center">
+                     <div class="flex items-center justify-center bg-blue-100 rounded-full w-16 h-16 mr-6">
+                        <i class="fas fa-store text-3xl text-blue-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">Paso 4: Petición Segura a la API de TATA</h3>
+                        <p class="text-gray-600">Nuestro backend realiza la llamada (`GET /productos/buscar`) a la API de TATA, adjuntando el token de autenticación (JWT). La API de TATA valida nuestro token y devuelve los resultados a nuestro backend.</p>
+                    </div>
+                </div>
+            </div>
+
+             <div class="flex justify-center">
+                <i class="fas fa-arrow-down text-3xl arrow"></i>
+            </div>
+
+             <!-- Step 5 -->
+            <div class="flow-card p-6 rounded-xl shadow-md border-l-4 border-green-500">
+                <div class="flex items-center">
+                    <div class="flex items-center justify-center bg-green-100 rounded-full w-16 h-16 mr-6">
+                        <i class="fas fa-user-check text-3xl text-green-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">Flujo Especial: Colocación de Pedido (POST)</h3>
+                        <p class="text-gray-600">Cuando se realiza una compra, el manejo de datos personales es crucial:</p>
+                         <ul class="list-disc list-inside mt-2 text-gray-600 space-y-1">
+                            <li><strong>Consentimiento Explícito:</strong> Nuestra app solicita al usuario permiso audible para compartir sus datos de entrega.</li>
+                            <li><strong>Minimización de Datos:</strong> Nuestro backend solo envía la información indispensable para la logística (nombre, dirección, pedido) al endpoint `POST /pedidos` de TATA.</li>
+                            <li class="font-semibold text-red-600">Jamás se comparten datos de autenticación del usuario (frase de voz, PIN).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="mt-12 p-6 bg-gray-700 text-white rounded-xl shadow-lg">
+            <h3 class="text-2xl font-bold text-center mb-3">Principios Clave de Seguridad</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                <div>
+                    <i class="fas fa-user-shield text-4xl text-blue-300 mb-2"></i>
+                    <h4 class="font-bold">Aislamiento</h4>
+                    <p class="text-sm text-gray-300">La app móvil está completamente aislada de la API de TATA.</p>
+                </div>
+                <div>
+                    <i class="fas fa-key text-4xl text-blue-300 mb-2"></i>
+                    <h4 class="font-bold">Centralización de Secretos</h4>
+                    <p class="text-sm text-gray-300">Las credenciales de acceso a TATA residen únicamente en nuestro backend.</p>
+                </div>
+                <div>
+                    <i class="fas fa-shield-virus text-4xl text-blue-300 mb-2"></i>
+                    <h4 class="font-bold">Verificación de Integridad</h4>
+                    <p class="text-sm text-gray-300">Aseguramos que solo nuestra app oficial pueda comunicarse con el backend.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div id="tech-details-modal" class="modal pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50 opacity-0">
+        <div id="modal-overlay" class="absolute w-full h-full bg-gray-900 opacity-75"></div>
+        
+        <div class="modal-container bg-white w-11/12 md:max-w-3xl mx-auto rounded-xl shadow-lg z-50 transform -translate-y-full transition-transform duration-300">
+            
+            <div class="modal-content py-4 text-left px-6">
+                <!-- Title -->
+                <div class="flex justify-between items-center pb-3">
+                    <p class="text-2xl font-bold text-gray-800">Detalles Técnicos y de Seguridad</p>
+                    <button id="close-modal-btn" class="modal-close cursor-pointer z-50 p-2 -mr-2">
+                        <i class="fas fa-times text-2xl text-gray-500 hover:text-gray-800"></i>
+                    </button>
+                </div>
+
+                <!-- Content -->
+                <div class="my-5 text-gray-700 max-h-[70vh] overflow-y-auto pr-4">
+                    <h4 class="text-xl font-bold text-blue-600 mb-3">1. Aclaraciones de Seguridad Aplicada</h4>
+                    <p class="mb-4">Para garantizar la protección del usuario y del sistema, implementamos varias capas de seguridad:</p>
+                    <ul class="list-disc list-inside space-y-3">
+                        <li><strong>Ofuscación de Código (R8):</strong> El código de la aplicación Android se ofusca durante la compilación. Esto dificulta enormemente que actores maliciosos puedan realizar ingeniería inversa para entender la lógica de la app o encontrar vulnerabilidades.</li>
+                        <li><strong>Verificación de Integridad (Play Integrity API):</strong> Esta API nos ayuda a verificar que las solicitudes a nuestro backend provienen de nuestra aplicación genuina y no de un cliente modificado o un bot. Esto protege nuestros sistemas y los de TATA contra el abuso y el fraude.</li>
+                        <li><strong>Almacenamiento Seguro en Dispositivo:</strong> Cualquier dato sensible que deba persistir temporalmente en el dispositivo del usuario (como un token de sesión) se almacena utilizando `EncryptedSharedPreferences`, el mecanismo nativo de Android para el guardado cifrado.</li>
+                         <li><strong>Manejo de Secretos en Backend:</strong> Se reitera que ninguna credencial, API Key o secreto relacionado con la API de TATA se almacena jamás en la aplicación móvil. Todo reside y se gestiona de forma segura en nuestro servidor.</li>
+                    </ul>
+
+                    <hr class="my-6">
+
+                    <h4 class="text-xl font-bold text-blue-600 mb-3">2. Detalle de Interacción con API de TATA</h4>
+                    <p class="mb-4">Para la integración, proponemos que la API de TATA exponga los siguientes endpoints:</p>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="font-semibold">Endpoints de Productos:</p>
+                            <ul class="list-disc list-inside pl-4 mt-2 space-y-1">
+                                <li><code>GET /productos/buscar?q={termino_busqueda}</code>: Para que podamos buscar productos en el catálogo.</li>
+                                <li><code>GET /productos/{id_producto}</code>: Para que podamos obtener detalles de un producto específico (precio, descripción, stock).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Endpoint de Pedidos:</p>
+                            <ul class="list-disc list-inside pl-4 mt-2">
+                                <li><code>POST /pedidos</code>: Para enviar un carrito finalizado. Recibiría un objeto JSON con los datos de entrega para ser gestionado con pago contra entrega.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h5 class="font-bold text-lg mt-6 mb-2">Flujo de Colocación de Pedido (Ejemplo Detallado)</h5>
+                    <ol class="list-decimal list-inside space-y-2">
+                        <li>El usuario confirma su carrito y dice "finalizar compra".</li>
+                        <li>Nuestra app responde: <em class="text-gray-800">"El total es de 1500 pesos. Para completar el pedido, necesitamos tu autorización para compartir tu nombre y dirección de entrega con TATA. ¿Estás de acuerdo?"</em></li>
+                        <li>El usuario responde afirmativamente.</li>
+                        <li>Nuestro Backend arma el `payload` del pedido (nombre, dirección, productos).</li>
+                        <li>Nuestro Backend, utilizando el token de autenticación, envía los datos del pedido de forma segura a la API `POST /pedidos` de TATA.</li>
+                        <li>La API de TATA valida nuestro token, procesa el pedido y nos devuelve una confirmación.</li>
+                        <li>Nuestra app informa al usuario: <em class="text-gray-800">"¡Excelente! Tu pedido ha sido realizado con éxito."</em></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const openModalBtn = document.getElementById('open-modal-btn');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modal = document.getElementById('tech-details-modal');
+        const modalContainer = modal.querySelector('.modal-container');
+
+        const toggleModal = () => {
+            const isModalVisible = !modal.classList.contains('pointer-events-none');
+            
+            if (isModalVisible) {
+                // Hide modal
+                modal.classList.add('opacity-0');
+                modalContainer.classList.add('-translate-y-full');
+                setTimeout(() => {
+                    modal.classList.add('pointer-events-none');
+                    document.body.classList.remove('modal-active');
+                }, 300);
+            } else {
+                // Show modal
+                document.body.classList.add('modal-active');
+                modal.classList.remove('pointer-events-none');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modalContainer.classList.remove('-translate-y-full');
+                }, 10);
+            }
+        };
+
+        openModalBtn.addEventListener('click', toggleModal);
+        closeModalBtn.addEventListener('click', toggleModal);
+        modalOverlay.addEventListener('click', toggleModal);
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape" && !modal.classList.contains('pointer-events-none')) {
+                toggleModal();
+            }
+        });
+    </script>
+
+</body>
+</html>
