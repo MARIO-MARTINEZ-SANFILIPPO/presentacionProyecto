@@ -62,7 +62,7 @@
                     </div>
                     <div>
                         <h3 class="text-xl font-bold text-gray-800">Paso 2: La App se Comunica con Nuestro Backend</h3>
-                        <p class="text-gray-600">La aplicación móvil **NUNCA** contacta directamente a la API de TATA. En su lugar, envía la solicitud a nuestro propio backend (API Spring Boot) de forma segura.</p>
+                        <p class="text-gray-600">La aplicación móvil **NUNCA** contacta directamente a la API de TATA. En su lugar, envía la solicitud a nuestro propio backend de forma segura.</p>
                         <div class="mt-2 flex items-center text-sm bg-green-100 text-green-800 p-2 rounded-md">
                             <i class="fas fa-lock mr-2"></i>
                             <span>Toda la comunicación está cifrada con <strong>HTTPS</strong>.</span>
@@ -102,15 +102,36 @@
                 <i class="fas fa-arrow-down text-3xl arrow"></i>
             </div>
 
-            <!-- Step 4 -->
+            <!-- Step 4: Selective Cache Strategy -->
+            <div class="flow-card p-6 rounded-xl shadow-md border-l-4 border-teal-500">
+                <div class="flex items-center">
+                    <div class="flex items-center justify-center bg-teal-100 rounded-full w-16 h-16 mr-6">
+                        <i class="fas fa-layer-group text-3xl text-teal-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">Paso 4: Estrategia de Caché Selectiva</h3>
+                        <p class="text-gray-600">Para maximizar la velocidad sin sacrificar la precisión, es una posibilidad implementar un caché inteligente:</p>
+                        <ul class="list-disc list-inside mt-2 text-gray-600 space-y-1">
+                            <li><strong>Datos estáticos</strong> (descripción, imagen) se guardan en caché por más tiempo.</li>
+                            <li><strong>Datos volátiles</strong> (stock, precio) no se cachean o tienen un tiempo de vida muy corto, verificándose en momentos clave como al agregar al carrito.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center">
+                <i class="fas fa-arrow-down text-3xl arrow"></i>
+            </div>
+
+            <!-- Step 5 -->
             <div class="flow-card p-6 rounded-xl shadow-md">
                 <div class="flex items-center">
                      <div class="flex items-center justify-center bg-blue-100 rounded-full w-16 h-16 mr-6">
                         <i class="fas fa-store text-3xl text-blue-600"></i>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold text-gray-800">Paso 4: Petición Segura a la API de TATA</h3>
-                        <p class="text-gray-600">Nuestro backend realiza la llamada (`GET /productos/buscar`) a la API de TATA, adjuntando el token de autenticación (JWT). La API de TATA valida nuestro token y devuelve los resultados a nuestro backend.</p>
+                        <h3 class="text-xl font-bold text-gray-800">Paso 5: Petición Segura a la API de TATA</h3>
+                        <p class="text-gray-600">Si la información no está en la caché, nuestro backend realiza la llamada a la API de TATA, adjuntando el token de autenticación. La API de TATA valida nuestro token y devuelve los resultados.</p>
                     </div>
                 </div>
             </div>
@@ -119,7 +140,7 @@
                 <i class="fas fa-arrow-down text-3xl arrow"></i>
             </div>
 
-             <!-- Step 5 -->
+             <!-- Step 6 -->
             <div class="flow-card p-6 rounded-xl shadow-md border-l-4 border-green-500">
                 <div class="flex items-center">
                     <div class="flex items-center justify-center bg-green-100 rounded-full w-16 h-16 mr-6">
@@ -130,7 +151,7 @@
                         <p class="text-gray-600">Cuando se realiza una compra, el manejo de datos personales es crucial:</p>
                          <ul class="list-disc list-inside mt-2 text-gray-600 space-y-1">
                             <li><strong>Consentimiento Explícito:</strong> Nuestra app solicita al usuario permiso audible para compartir sus datos de entrega.</li>
-                            <li><strong>Minimización de Datos:</strong> Nuestro backend solo envía la información indispensable para la logística (nombre, dirección, pedido) al endpoint `POST /pedidos` de TATA.</li>
+                            <li><strong>Minimización de Datos:</strong> Nuestro backend solo envía la información indispensable para la logística al endpoint `POST /pedidos` de TATA.</li>
                             <li class="font-semibold text-red-600">Jamás se comparten datos de autenticación del usuario (frase de voz, PIN).</li>
                         </ul>
                     </div>
