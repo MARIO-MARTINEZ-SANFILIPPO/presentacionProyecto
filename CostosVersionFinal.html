@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Costos del Proyecto - Asistente de Voz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+	<script type="text/javascript">document.oncontextmenu = function(){return false;}</script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Roboto', sans-serif; background-color: #f4f7f9; }
+        h1, h2, h3, h4, button, .font-display { font-family: 'Poppins', sans-serif; }
+        .card { background-color: white; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05); transition: all 0.3s ease-in-out; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        .slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; background: #2563eb; cursor: pointer; border-radius: 50%; }
+        .slider::-moz-range-thumb { width: 20px; height: 20px; background: #2563eb; cursor: pointer; border-radius: 50%; }
+        .chart-container { position: relative; height: 280px; width: 100%; max-width: 350px; margin: auto; }
+        .radio-label { transition: all 0.2s ease-in-out; border: 2px solid #e5e7eb; }
+        .radio-label:hover { border-color: #93c5fd; }
+        input[type="radio"]:checked + .radio-label { border-color: #2563eb; background-color: #eff6ff; box-shadow: 0 0 0 2px #2563eb40; }
+    </style>
+</head>
+<body class="text-gray-700" oncontextmenu="return false;">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+
+        <header class="text-center mb-10">
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-800">Calculadora de Costos del Proyecto</h1>
+            <p class="text-lg text-gray-500 mt-2">Asistente de Compras por Voz</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="lg:col-span-2 space-y-8">
+                <div class="card p-6">
+                    <h2 class="text-2xl font-semibold mb-6 text-gray-800 border-b pb-4">1. Estimación de Escenarios de Desarrollo</h2>
+                     <div class="flex flex-wrap gap-3">
+                        <button id="btn-optimista" class="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">Optimista</button>
+                        <button id="btn-base" class="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">Más Probable (Base)</button>
+                        <button id="btn-pesimista" class="flex-1 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">Pesimista</button>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <h2 class="text-2xl font-semibold mb-6 text-gray-800 border-b pb-4">2. Parámetros de Costos Mensuales (Operación)</h2>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Estrategia de Despliegue</h3>
+                        <div id="deployment-strategy" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div><input type="radio" name="strategy" id="google-cloud" value="google-cloud" class="hidden" checked><label for="google-cloud" class="radio-label block p-4 rounded-lg border-2 cursor-pointer"><span class="font-bold block">Google Cloud (Serverless)</span><span class="text-sm text-gray-500">PaaS gestionado, pago por uso.</span></label></div>
+                            <div><input type="radio" name="strategy" id="netuy1-whisper" value="netuy1-whisper" class="hidden"><label for="netuy1-whisper" class="radio-label block p-4 rounded-lg border-2 cursor-pointer"><span class="font-bold block">Netuy Plan 1 + Whisper</span><span class="text-sm text-gray-500">IaaS Local + STT Autoalojado.</span></label></div>
+                            <div><input type="radio" name="strategy" id="netuy2-whisper" value="netuy2-whisper" class="hidden"><label for="netuy2-whisper" class="radio-label block p-4 rounded-lg border-2 cursor-pointer"><span class="font-bold block">Netuy Plan 2 + Whisper</span><span class="text-sm text-gray-500">Más RAM/Storage + STT Autoalojado.</span></label></div>
+                            <div><input type="radio" name="strategy" id="hybrid" value="hybrid" class="hidden"><label for="hybrid" class="radio-label block p-4 rounded-lg border-2 cursor-pointer"><span class="font-bold block">Híbrido (Netuy 1 + Google API)</span><span class="text-sm text-gray-500">Infraestructura local, APIs de voz en la nube.</span></label></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 pt-6 border-t">
+                        <h3 class="text-lg font-semibold mb-4">Uso Estimado</h3>
+                        <div>
+                           <label for="usuarios" class="block font-medium mb-1">Usuarios Activos Mensuales: <span id="usuarios-val" class="font-bold text-blue-600">2000</span></label>
+                           <input type="range" id="usuarios" min="0" max="5000" step="100" value="2000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
+                       </div>
+                    </div>
+
+                    <!-- Panel de Detalles de Estrategia -->
+                    <div id="strategy-details-container" class="mt-8 pt-6 border-t">
+                        <h3 class="text-lg font-semibold mb-4">Análisis de la Estrategia Seleccionada</h3>
+                        <div id="strategy-details" class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg text-gray-800">
+                            <!-- El contenido se inyectará aquí con JS -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="lg:col-span-1">
+                 <div class="card p-6 sticky top-8">
+                    <h2 class="text-2xl font-semibold mb-6 text-gray-800 border-b pb-4">Estimación de Costos</h2>
+                     <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Costos Únicos (Desarrollo)</h3>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                             <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Horas-Equipo: <span id="total-horas" class="font-bold">800</span></span>
+                                <span id="costo-rrhh" class="font-bold text-xl text-gray-800">$24,000</span>
+                            </div>
+                        </div>
+                    </div>
+                     <div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Costos Mensuales (Operación)</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Infraestructura / Hosting:</span>
+                                <span id="costo-infra" class="font-bold text-xl text-gray-800">$41.00</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">APIs de Voz (STT/TTS):</span>
+                                <span id="costo-apis" class="font-bold text-xl text-gray-800">$694.08</span>
+                            </div>
+                             <div class="bg-gray-100 p-4 rounded-lg mt-2">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-semibold text-gray-800">Costo Mensual Total:</span>
+                                    <span id="costo-mensual-total" class="font-bold text-2xl text-blue-600">$735.08</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 border-t pt-6">
+                        <h3 class="text-lg font-semibold text-center mb-4">Distribución de Costos Mensuales</h3>
+                        <div class="chart-container">
+                            <canvas id="costChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <footer class="text-center mt-6 pt-4 border-t border-gray-200">
+                        <p class="text-sm text-gray-500">© 2025 - Desarrollado por TechRandomSolutionStudio</p>
+                    </footer>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.addEventListener('contextmenu', event => event.preventDefault());
+
+            // Elementos del DOM
+            const usuariosSlider = document.getElementById('usuarios');
+            const usuariosVal = document.getElementById('usuarios-val');
+            
+            const totalHorasDisplay = document.getElementById('total-horas');
+            const costoRrhhDisplay = document.getElementById('costo-rrhh');
+            const costoInfraDisplay = document.getElementById('costo-infra');
+            const costoApisDisplay = document.getElementById('costo-apis');
+            const costoMensualTotalDisplay = document.getElementById('costo-mensual-total');
+            const strategyDetailsDiv = document.getElementById('strategy-details');
+            
+            const btnOptimista = document.getElementById('btn-optimista');
+            const btnBase = document.getElementById('btn-base');
+            const btnPesimista = document.getElementById('btn-pesimista');
+            const strategyRadios = document.querySelectorAll('input[name="strategy"]');
+
+            // Datos y Constantes
+            const COSTO_HORA_DEV = 30;
+            const COSTO_GOOGLE_STT_PER_MIN = 0.024;
+            const MIN_POR_USUARIO_MES = 14.462; // Basado en 28,924 min / 2,000 usuarios
+            const COSTO_BASE_GOOGLE_INFRA = 41;
+            const COSTO_NETUY_PLAN1 = 229.11;
+            const COSTO_NETUY_PLAN2 = 306.81;
+
+            const strategyDetailsContent = {
+                'google-cloud': {
+                    title: 'Google Cloud (Serverless - PaaS)',
+                    text: 'Ideal para fases iniciales y validación. La complejidad operativa es baja ya que Google gestiona la infraestructura. El costo es variable y se basa en el uso real, lo que permite un arranque económico. La principal desventaja es el costo de la API de voz a escala y la mayor latencia para usuarios en Uruguay.'
+                },
+                'netuy1-whisper': {
+                    title: 'Netuy Plan 1 + Whisper Autoalojado (IaaS)',
+                    text: 'Estrategia de optimización de costos a largo plazo. Elimina el costo variable de la API de voz. <strong>Consideración Clave:</strong> Requiere una alta inversión en horas de DevOps para desplegar, mantener y entrenar el modelo Whisper, además de gestionar toda la infraestructura (SO, Docker, seguridad). Ofrece soberanía de datos y latencia mínima.'
+                },
+                'netuy2-whisper': {
+                    title: 'Netuy Plan 2 + Whisper Autoalojado (IaaS)',
+                    text: 'Similar al Plan 1, pero con más RAM y almacenamiento NVMe. Adecuado para un mayor volumen de usuarios o si el modelo Whisper requiere más recursos. Mantiene la alta carga operativa de DevOps, pero asegura un mejor rendimiento bajo estrés. La soberanía y baja latencia son sus puntos fuertes.'
+                },
+                'hybrid': {
+                    title: 'Híbrido (Netuy Plan 1 + Google API)',
+                    text: 'Un enfoque balanceado. Aprovecha la <strong>baja latencia y soberanía de datos</strong> de la infraestructura local de Netuy para el backend, mientras se utiliza la API de voz de Google por su <strong>alta calidad y bajo mantenimiento</strong>. Mantiene un costo operativo variable por el uso de la API, pero optimiza el rendimiento y la gestión de datos principales.'
+                }
+            };
+
+            // Gráfico
+            const chartCtx = document.getElementById('costChart').getContext('2d');
+            const costChart = new Chart(chartCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Infraestructura/Hosting', 'APIs de Voz'],
+                    datasets: [{
+                        data: [41, 694],
+                        backgroundColor: ['#2563eb', '#ef4444'],
+                        borderColor: ['#ffffff'],
+                        borderWidth: 3,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '60%',
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { size: 14, family: 'Roboto' } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) { label += ': '; }
+                                    if (context.parsed !== null) {
+                                        label += new Intl.NumberFormat('es-UY', { style: 'currency', currency: 'USD' }).format(context.parsed);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Funciones de Cálculo y Renderizado
+            function updateStrategyDetails(strategy) {
+                const details = strategyDetailsContent[strategy];
+                if (details) {
+                    strategyDetailsDiv.innerHTML = `<h4 class="font-bold text-gray-900 mb-2">${details.title}</h4><p class="text-sm">${details.text}</p>`;
+                }
+            }
+
+            function calculateAndRender() {
+                const usuarios = parseInt(usuariosSlider.value);
+                const strategy = document.querySelector('input[name="strategy"]:checked').value;
+
+                let costoInfra = 0;
+                let costoApis = 0;
+                
+                switch(strategy) {
+                    case 'google-cloud':
+                        costoInfra = COSTO_BASE_GOOGLE_INFRA;
+                        costoApis = usuarios * MIN_POR_USUARIO_MES * COSTO_GOOGLE_STT_PER_MIN;
+                        break;
+                    case 'netuy1-whisper':
+                        costoInfra = COSTO_NETUY_PLAN1;
+                        costoApis = 0;
+                        break;
+                    case 'netuy2-whisper':
+                        costoInfra = COSTO_NETUY_PLAN2;
+                        costoApis = 0;
+                        break;
+                    case 'hybrid':
+                        costoInfra = COSTO_NETUY_PLAN1;
+                        costoApis = usuarios * MIN_POR_USUARIO_MES * COSTO_GOOGLE_STT_PER_MIN;
+                        break;
+                }
+                
+                const costoMensualTotal = costoInfra + costoApis;
+
+                usuariosVal.textContent = new Intl.NumberFormat('es-UY').format(usuarios);
+                const currencyFormat = new Intl.NumberFormat('es-UY', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 });
+                
+                costoInfraDisplay.textContent = currencyFormat.format(costoInfra);
+                costoApisDisplay.textContent = currencyFormat.format(costoApis);
+                costoMensualTotalDisplay.textContent = currencyFormat.format(costoMensualTotal);
+
+                costChart.data.datasets[0].data = [costoInfra, costoApis];
+                costChart.update();
+                updateStrategyDetails(strategy);
+            }
+
+            function setScenario(scenario) {
+                let horas = 800;
+                if (scenario === 'optimista') horas = 720;
+                if (scenario === 'pesimista') horas = 960;
+                
+                const costoRrhh = horas * COSTO_HORA_DEV;
+                
+                totalHorasDisplay.textContent = new Intl.NumberFormat('es-UY').format(horas);
+                costoRrhhDisplay.textContent = new Intl.NumberFormat('es-UY', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(costoRrhh);
+            }
+
+            // Event Listeners
+            usuariosSlider.addEventListener('input', calculateAndRender);
+            strategyRadios.forEach(radio => radio.addEventListener('change', calculateAndRender));
+
+            btnOptimista.addEventListener('click', () => setScenario('optimista'));
+            btnBase.addEventListener('click', () => setScenario('base'));
+            btnPesimista.addEventListener('click', () => setScenario('pesimista'));
+            
+            // Carga Inicial
+            setScenario('base');
+            calculateAndRender();
+        });
+    </script>
+</body>
+</html>
