@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principios de Privacidad desde el Diseño (PbD)</title>
+    <script type="text/javascript">document.oncontextmenu = function(){return false;}</script>
+    <!-- Tailwind CSS para el diseño -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Estilo base para usar la fuente Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Pequeño degradado para el fondo */
+        body {
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <!-- Encabezado principal -->
+        <header class="text-center mb-10">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
+                Principios de Privacidad desde el Diseño (PbD)
+            </h1>
+            <p class="mt-3 text-lg sm:text-xl text-gray-600">
+                Aplicación en el Proyecto "Asistente de Compras por Voz"
+            </p>
+        </header>
+
+        <!-- Contenedor de los principios -->
+        <div class="space-y-6">
+
+            <!-- Principio 1: Proactivo, no Reactivo -->
+            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 transition-all hover:shadow-lg hover:border-blue-400">
+                <div class="flex flex-col md:flex-row items-start gap-4">
+                    <div class="flex-shrink-0 flex items-center gap-4 md:w-1/4">
+                        <div class="bg-blue-100 text-blue-600 p-3 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                        </div>
+                        <h2 class="text-lg font-semibold text-gray-900">1. Proactivo, no Reactivo</h2>
+                    </div>
+                    <div class="md:w-3/4 md:border-l md:pl-6 border-gray-200">
+                        <p class="text-gray-700">En lugar de esperar a un incidente de privacidad, hemos realizado este análisis desde la concepción del proyecto, utilizando herramientas como el <strong class="font-semibold text-blue-600">Checklist "Responsibility by Design"</strong> para guiar nuestras decisiones.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Principio 2: Privacidad por Defecto -->
+            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 transition-all hover:shadow-lg hover:border-green-400">
+                <div class="flex flex-col md:flex-row items-start gap-4">
+                    <div class="flex-shrink-0 flex items-center gap-4 md:w-1/4">
+                        <div class="bg-green-100 text-green-600 p-3 rounded-full">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        </div>
+                        <h2 class="text-lg font-semibold text-gray-900">2. Privacidad por Defecto</h2>
+                    </div>
+                    <div class="md:w-3/4 md:border-l md:pl-6 border-gray-200">
+                        <p class="text-gray-700">Esta es la piedra angular de nuestra elección de STT. La API nativa de Android no nos permite controlar el uso de los datos. Por ello, elegimos la <strong class="font-semibold text-green-600">API de Google Cloud Speech-to-Text</strong>, que nos permite <strong class="font-semibold text-green-600">desactivar explícitamente el registro de datos</strong>. Por defecto, la privacidad del usuario es máxima.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Principio 3: Privacidad Integrada en el Diseño -->
+            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 transition-all hover:shadow-lg hover:border-purple-400">
+                <div class="flex flex-col md:flex-row items-start gap-4">
+                    <div class="flex-shrink-0 flex items-center gap-4 md:w-1/4">
+                        <div class="bg-purple-100 text-purple-600 p-3 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="M12.97 12.23c.3.3.44.7.44 1.13s-.14.83-.44 1.13c-.3.3-.7.44-1.13.44s-.83-.14-1.13-.44c-.3-.3-.44-.7-.44-1.13s.14-.83.44-1.13c.3-.3.7-.44 1.13-.44s.83.14 1.13.44z"></path><path d="M9.91 18.01c.3.3.44.7.44 1.13s-.14.83-.44 1.13c-.3.3-.7.44-1.13.44s-.83-.14-1.13-.44c-.3-.3-.44-.7-.44-1.13s.14-.83.44-1.13c.3-.3.7-.44 1.13-.44s.83.14 1.13.44z"></path><path d="m16.09 6.7-.45.45"></path><path d="M13 18H9.5"></path><path d="M13 15h-2"></path><path d="M16 15h.5"></path></svg>
+                        </div>
+                        <h2 class="text-lg font-semibold text-gray-900">3. Privacidad Integrada</h2>
+                    </div>
+                    <div class="md:w-3/4 md:border-l md:pl-6 border-gray-200">
+                        <p class="text-gray-700">La seguridad no es un añadido, es parte de la arquitectura. Esto se refleja en nuestro stack con: <strong class="font-semibold text-purple-600">HTTPS, JWT, R8, Wazuh/Falco</strong> para monitoreo y roles <strong class="font-semibold text-purple-600">IAM</strong> en la base de datos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Principio 4: Funcionalidad Total (Suma Positiva) -->
+            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 transition-all hover:shadow-lg hover:border-yellow-400">
+                <div class="flex flex-col md:flex-row items-start gap-4">
+                    <div class="flex-shrink-0 flex items-center gap-4 md:w-1/4">
+                        <div class="bg-yellow-100 text-yellow-600 p-3 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                        </div>
+                        <h2 class="text-lg font-semibold text-gray-900">4. Funcionalidad Total</h2>
+                    </div>
+                    <div class="md:w-3/4 md:border-l md:pl-6 border-gray-200">
+                        <p class="text-gray-700">Demostramos que la seguridad y la privacidad no son un obstáculo, sino un habilitador. Un usuario solo confiará datos sensibles a un sistema que percibe como seguro. <strong class="font-semibold text-yellow-800">La confianza es una funcionalidad clave</strong> de nuestro producto.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Principio 5: Seguridad Extremo-a-Extremo -->
+            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 transition-all hover:shadow-lg hover:border-red-400">
+                <div class="flex flex-col md:flex-row items-start gap-4">
+                    <div class="flex-shrink-0 flex items-center gap-4 md:w-1/4">
+                        <div class="bg-red-100 text-red-600 p-3 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
+                        </div>
+                        <h2 class="text-lg font-semibold text-gray-900">5. Seguridad Extremo-a-Extremo</h2>
+                    </div>
+                    <div class="md:w-3/4 md:border-l md:pl-6 border-gray-200">
+                        <p class="text-gray-700">Los datos están protegidos durante todo su ciclo de vida: desde la captura en el dispositivo, pasando por el transporte cifrado (HTTPS), hasta su almacenamiento seguro y con acceso restringido en <strong class="font-semibold text-red-600">Google Cloud SQL</strong>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Principio 6: Visibilidad y Transparencia -->
+            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 transition-all hover:shadow-lg hover:border-indigo-400">
+                <div class="flex flex-col md:flex-row items-start gap-4">
+                    <div class="flex-shrink-0 flex items-center gap-4 md:w-1/4">
+                        <div class="bg-indigo-100 text-indigo-600 p-3 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </div>
+                        <h2 class="text-lg font-semibold text-gray-900">6. Visibilidad y Transparencia</h2>
+                    </div>
+                    <div class="md:w-3/4 md:border-l md:pl-6 border-gray-200">
+                        <p class="text-gray-700">Nos comprometemos a tener una política de privacidad clara y accesible. El <strong class="font-semibold text-indigo-600">consentimiento informado</strong> para el procesamiento de voz será explícito y audible durante el onboarding, explicando de forma sencilla qué se procesa y por qué.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Principio 7: Respeto por la Privacidad del Usuario -->
+            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 transition-all hover:shadow-lg hover:border-pink-400">
+                <div class="flex flex-col md:flex-row items-start gap-4">
+                    <div class="flex-shrink-0 flex items-center gap-4 md:w-1/4">
+                        <div class="bg-pink-100 text-pink-600 p-3 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        </div>
+                        <h2 class="text-lg font-semibold text-gray-900">7. Respeto por la Privacidad del Usuario</h2>
+                    </div>
+                    <div class="md:w-3/4 md:border-l md:pl-6 border-gray-200">
+                        <p class="text-gray-700">El sistema se diseñará para facilitar el ejercicio de los <strong class="font-semibold text-pink-600">derechos ARCO</strong> (Acceso, Rectificación, Cancelación, Oposición). El panel administrativo incluirá funcionalidades para gestionarlos.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
