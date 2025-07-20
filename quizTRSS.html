@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruleta de Preguntas - Defensa de Proyecto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* gray-900 */
+            color: #f3f4f6; /* gray-100 */
+        }
+        .wheel-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+        }
+        canvas {
+            transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .pointer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 40px solid #ef4444; /* red-500 */
+            transform: translate(-50%, -100%) rotate(180deg);
+            z-index: 10;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background: #1f2937; /* gray-800 */
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 600px;
+            width: 90%;
+            border: 1px solid #374151; /* gray-700 */
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-8 text-center">
+        <header class="mb-8">
+            <h1 class="text-4xl md:text-5xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-pink-500">
+                Ruleta de Defensa
+            </h1>
+            <p class="mt-2 text-lg text-gray-400">Tech Random Solutions Studio</p>
+        </header>
+
+        <main>
+            <div class="wheel-container mb-8">
+                <div class="pointer"></div>
+                <canvas id="wheelCanvas" width="400" height="400"></canvas>
+            </div>
+
+            <button id="spinBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-full text-xl shadow-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-500/50">
+                Girar la Ruleta
+            </button>
+        </main>
+    </div>
+
+    <!-- Modal para mostrar la pregunta -->
+    <div id="questionModal" class="modal-overlay">
+        <div class="modal-content">
+            <div id="modalHeader" class="text-center mb-4">
+                <p class="text-indigo-400 font-semibold text-lg">Le toca a:</p>
+                <h2 id="personName" class="text-4xl font-bold text-white"></h2>
+            </div>
+            <div class="bg-gray-900 p-4 rounded-lg">
+                <p class="text-gray-300 font-semibold">Pregunta:</p>
+                <p id="questionText" class="text-lg text-white mt-1"></p>
+            </div>
+            <button id="closeModalBtn" class="mt-6 w-full bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">
+                Cerrar
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('wheelCanvas');
+        const ctx = canvas.getContext('2d');
+        const spinBtn = document.getElementById('spinBtn');
+        const modal = document.getElementById('questionModal');
+        const personNameEl = document.getElementById('personName');
+        const questionTextEl = document.getElementById('questionText');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        const names = ["Mario", "Kamila", "William", "Bruno"];
+        
+        // Array de preguntas extraídas del cuestionario
+        const questions = [
+            "En menos de 2 minutos, expliquen el problema central que resuelven y por qué su solución es relevante en Uruguay.",
+            "¿Cuál fue el descubrimiento más crítico que obtuvieron de la UNCU y que modificó el rumbo del proyecto?",
+            "Si Google Assistant lanzara una skill similar, ¿cuál seguiría siendo el diferencial clave de su producto?",
+            "¿Por qué eligieron Java con Spring Boot para el backend en lugar de alternativas como Node.js o Python?",
+            "¿Cuál es el KPI técnico o de negocio que activaría la decisión de migrar de Google Cloud a Netuy?",
+            "Describan el flujo de interacción exacto para mitigar el riesgo de 'Confusión en acciones sensibles por voz' (R005).",
+            "Expliquen, como si hablaran con un usuario final, por qué usar la API de pago de Google STT protege su privacidad.",
+            "¿Cómo la elección de Rasa Open Source mitiga o aumenta el riesgo de 'dependencia de APIs de terceros'?",
+            "¿Qué plan de mantenimiento proponen para después de la entrega final? ¿Quién reentrenaría el modelo de Rasa?",
+            "¿Qué sucede si el asistente de voz falla tres veces seguidas en entender al usuario? ¿Cuál es el mecanismo de escape?",
+            "Describan técnicamente cómo usarían Prometheus y Grafana para diagnosticar una caída del 50% en la finalización de compras.",
+            "¿Cómo manejan la ambigüedad conversacional? Por ejemplo, si un usuario dice 'quiero leche' y hay varios tipos.",
+            "¿Priorizarían un costo 90% menor (con Whisper) o una mejor experiencia de usuario (menor latencia)? Justifiquen.",
+            "¿Cómo la decisión de un ciclo de vida híbrido les permitió gestionar mejor los riesgos y costos? Den un ejemplo concreto.",
+            "¿Cómo se aseguran de que un usuario con discapacidad visual ha comprendido y consentido los términos de forma válida?",
+            "Describan el proceso técnico de las pruebas continuas para mitigar el riesgo 'Reconocimiento de voz impreciso'.",
+            "Describan la estrategia técnica para gestionar secretos (API keys, contraseñas) en CI/CD y producción.",
+            "Si la latencia con la API de voz es de 2.5 segundos, ¿es aceptable? ¿Cuál es su umbral máximo definido?",
+            "¿Cómo equilibran la necesidad de analizar el historial de compras para personalización con el derecho a la privacidad?",
+            "¿Qué tipo de solicitudes han decidido explícitamente que están fuera del alcance del asistente y por qué?"
+        ];
+
+        const numSegments = questions.length;
+        const anglePerSegment = (2 * Math.PI) / numSegments;
+        const colors = ['#4f46e5', '#ec4899', '#10b981', '#f59e0b', '#6366f1', '#d946ef', '#22c55e', '#f97316'];
+        let currentAngle = 0;
+        let isSpinning = false;
+
+        function drawWheel() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = canvas.width / 2 - 10;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.font = '14px Inter, sans-serif';
+            ctx.textBaseline = 'middle';
+            ctx.textAlign = 'center';
+
+            for (let i = 0; i < numSegments; i++) {
+                const startAngle = i * anglePerSegment;
+                const endAngle = startAngle + anglePerSegment;
+
+                // Dibujar el segmento
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+                ctx.closePath();
+                ctx.fillStyle = colors[i % colors.length];
+                ctx.fill();
+                ctx.strokeStyle = '#111827'; // Borde entre segmentos
+                ctx.lineWidth = 4;
+                ctx.stroke();
+
+                // Dibujar el número de la pregunta
+                ctx.save();
+                ctx.fillStyle = 'white';
+                const textAngle = startAngle + anglePerSegment / 2;
+                ctx.translate(centerX + Math.cos(textAngle) * (radius / 1.5), centerY + Math.sin(textAngle) * (radius / 1.5));
+                ctx.rotate(textAngle + Math.PI / 2);
+                ctx.fillText(`Pregunta ${i + 1}`, 0, 0);
+                ctx.restore();
+            }
+        }
+
+        function spin() {
+            if (isSpinning) return;
+            isSpinning = true;
+
+            const randomSpins = Math.random() * 5 + 5; // Mínimo 5 vueltas, máximo 10
+            const stopAngle = Math.random() * 2 * Math.PI;
+            const totalRotation = randomSpins * 2 * Math.PI + stopAngle;
+            
+            canvas.style.transition = 'transform 5s cubic-bezier(0.25, 0.1, 0.25, 1)';
+            canvas.style.transform = `rotate(${totalRotation}rad)`;
+
+            setTimeout(() => {
+                const finalAngle = totalRotation % (2 * Math.PI);
+                const winningSegment = Math.floor((2 * Math.PI - finalAngle) / anglePerSegment) % numSegments;
+                
+                const selectedQuestion = questions[winningSegment];
+                const selectedPerson = names[Math.floor(Math.random() * names.length)];
+                
+                showQuestion(selectedPerson, selectedQuestion);
+                
+                // Reset for next spin
+                canvas.style.transition = 'none';
+                const newAngle = totalRotation % (2 * Math.PI);
+                canvas.style.transform = `rotate(${newAngle}rad)`;
+
+                isSpinning = false;
+            }, 5000); // Coincide con la duración de la transición CSS
+        }
+
+        function showQuestion(person, question) {
+            personNameEl.textContent = person;
+            questionTextEl.textContent = question;
+            modal.classList.add('active');
+        }
+
+        function hideQuestion() {
+            modal.classList.remove('active');
+        }
+
+        spinBtn.addEventListener('click', spin);
+        closeModalBtn.addEventListener('click', hideQuestion);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                hideQuestion();
+            }
+        });
+
+        // Dibujar la ruleta inicial
+        drawWheel();
+    </script>
+
+</body>
+</html>
